@@ -1,24 +1,23 @@
 {
   "files": {
-    "main.css": "/weather-app/static/css/main.88d50882.chunk.css",
-    "main.js": "/weather-app/static/js/main.f016a95a.chunk.js",
-    "main.js.map": "/weather-app/static/js/main.f016a95a.chunk.js.map",
+    "main.css": "/weather-app/static/css/main.3aab4fb4.chunk.css",
+    "main.js": "/weather-app/static/js/main.10cb13a3.chunk.js",
+    "main.js.map": "/weather-app/static/js/main.10cb13a3.chunk.js.map",
     "runtime-main.js": "/weather-app/static/js/runtime-main.221e19a4.js",
     "runtime-main.js.map": "/weather-app/static/js/runtime-main.221e19a4.js.map",
-    "static/js/2.61d2f596.chunk.js": "/weather-app/static/js/2.61d2f596.chunk.js",
-    "static/js/2.61d2f596.chunk.js.map": "/weather-app/static/js/2.61d2f596.chunk.js.map",
+    "static/js/2.c7410902.chunk.js": "/weather-app/static/js/2.c7410902.chunk.js",
+    "static/js/2.c7410902.chunk.js.map": "/weather-app/static/js/2.c7410902.chunk.js.map",
     "static/js/3.4b9607d2.chunk.js": "/weather-app/static/js/3.4b9607d2.chunk.js",
     "static/js/3.4b9607d2.chunk.js.map": "/weather-app/static/js/3.4b9607d2.chunk.js.map",
     "index.html": "/weather-app/index.html",
-    "static/css/main.88d50882.chunk.css.map": "/weather-app/static/css/main.88d50882.chunk.css.map",
-    "static/js/2.61d2f596.chunk.js.LICENSE.txt": "/weather-app/static/js/2.61d2f596.chunk.js.LICENSE.txt",
-    "static/media/index.scss": "/weather-app/static/media/pin.f9700a28.png",
+    "static/css/main.3aab4fb4.chunk.css.map": "/weather-app/static/css/main.3aab4fb4.chunk.css.map",
+    "static/js/2.c7410902.chunk.js.LICENSE.txt": "/weather-app/static/js/2.c7410902.chunk.js.LICENSE.txt",
     "static/media/sun.6d48da50.png": "/weather-app/static/media/sun.6d48da50.png"
   },
   "entrypoints": [
     "static/js/runtime-main.221e19a4.js",
-    "static/js/2.61d2f596.chunk.js",
-    "static/css/main.88d50882.chunk.css",
-    "static/js/main.f016a95a.chunk.js"
+    "static/js/2.c7410902.chunk.js",
+    "static/css/main.3aab4fb4.chunk.css",
+    "static/js/main.10cb13a3.chunk.js"
   ]
 }
