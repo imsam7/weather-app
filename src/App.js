@@ -1,12 +1,13 @@
 import {  Route, BrowserRouter as Router } from 'react-router-dom';
+import {HashRouter } from 'react-router-dom';
 import WeatherHomeContainer from './components/containers/WeatherHomeContainer';
 
 function App() {
   return (
-    <Router>
+    <HashRouter>
       <Route exact path="/" component={WeatherHomeContainer} />
       {/* <Route path='/Followers/:username' component={FollowersContainer} /> */}
-    </Router>
+    </HashRouter>
   );
 }
 

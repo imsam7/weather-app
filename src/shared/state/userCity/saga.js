@@ -5,7 +5,7 @@ import { GET_USERCITY, GET_USERCITY_SUCCESS, GET_USERCITY_FAILURE } from './acti
 //Generator function
 function* userCityDetails(action) {
     try {
-        const response = yield call(getUserCity, action.payload.userName);
+        const response = yield call(getUserCity);
         yield put({ type: GET_USERCITY_SUCCESS, data: response })
     }   
     catch (error) {
