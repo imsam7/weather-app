@@ -30,13 +30,12 @@ class WeatherHomeContainer extends React.Component {
     }
 
     render() {
-        if (this.props.weatherData.loading)
-            return <Loader />
-        else
-            return <>
-                <Form form={form} onChange={this.cityChange} />
-                <WeatherHomeLayout weatherData={this.props.weatherData} />
+        return (
+            <>
+                <Form form={form} className="myForm" onChange={this.cityChange} />
+                {this.props.weatherData.loading ? <Loader /> : <WeatherHomeLayout weatherData={this.props.weatherData} />}
             </>
+        )
     }
 }
 

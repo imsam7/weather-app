@@ -135,7 +135,7 @@ export const form = {
                         "population_proper": "3073350"
                     }, 
                     {
-                        "city": "Cawnpore", 
+                        "city": "Kanpur", 
                         "lat": "26.4725", 
                         "lng": "80.3311", 
                         "country": "India", 
@@ -2075,7 +2075,7 @@ export const form = {
             "valueProperty": "city",
             "dataType": "string",
             "idPath": "city",
-            "template": "<span>{{ item.city }}</span>",
+            "template": "<span>{{ item.city }}, {{item.admin_name}}</span>",
             "selectThreshold": 0.3,
             "validate": {
                 "onlyAvailableItems": false

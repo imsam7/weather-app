@@ -137,119 +137,318 @@ body
       text-align: center;
     }
 
-    .fgqWGD {
-      color: rgb(255, 255, 255);
-      display: block;
-      font-weight: 600;
-      font-size: 30px;
-      text-align: left;
-      padding: 5px 0px;
-      position: relative
-    }
-
-    .bJCmFu {
-      width: 100%;
-      border: none;
-      background-color: rgb(255, 255, 255);
-      font-size: 16px;
-      padding: 10px 15px 10px 40px;
-      color: rgb(197, 197, 197);
-      transition: all 0.2s ease 0s;
-      border-radius: 20px;
-      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-  }
-
-  .dbBfGZ {
-    top: 0%;
-    position: relative;
-    margin: 0px auto;
-    max-width: 500px;
-    transition: all 0.8s ease 0.5s;
-}
-
-.cUWXFh {
-  max-width: 1500px;
-  margin: 0px auto;
-  height: calc(100vh - 64px);
-  width: 100%;
-  position: relative;
-}
-
-    .add-on .input-group-btn > .btn {
-      border-left-width:0;left:-2px;
-      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    }
-    /* stop the glowing blue shadow */
-    .add-on .form-control:focus {
-     box-shadow:none;
-     -webkit-box-shadow:none; 
-     border-color:#cccccc; 
-    }
-    .form-control{width:20%}
-    .navbar-nav > li > a {
-      border-right: 1px solid #ddd;
-      padding-bottom: 15px;
-      padding-top: 15px;
-    }
-    .navbar-nav:last-child{ border-right:0}
-
-    .gAuHxY {
-      display: block;
-      margin: 0px;
-      text-transform: uppercase;
-      font-weight: 400;
-      color: rgb(255, 255, 255);
-      opacity: 1;
-      height: auto;
-      position: relative;
-      padding: 20px 0px;
-      font-size: 30px;
-      top: 20%;
-      text-align: center;
-      transition: all 0.5s ease 0s;
-  }
-
-  .imIJgB {
-    display: block;
-    height: 64px;
-    margin: 0px;
-    padding: 20px 0px;
-    font-size: 20px;
-    text-transform: uppercase;
-    font-weight: 400;
-    color: rgb(255, 255, 255);
-    transition: all 0.3s ease 1.4s;
-    opacity: 0;
-}
-
-  .dteCCc {
-    display: flex;
-    flex-wrap: wrap;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
-    padding: 40px 0px;
-    opacity: 0;
-    position: relative;
-    top: 20px;
-    animation: 0.5s ease 1.4s 1 normal forwards running dhgPis;
-}
-
-.form
-{
-  width: auto;
-  @media (min-width: 768px)
-  {
-    width: 30%;
-    height: 100px;
-  }
-}
-
 .btn-default{
   border-color:#ffffff
 }
 
-.form-control
+// .form-control
+// {
+//   border: none;
+// }
+
+
+
+.formio-component-select .choices[data-type=select-one]:after
 {
+  // content: url('../img/pin.png');
+  top: 20%;
   border: none;
+  margin: 0;
+}
+
+@media only screen and (max-width: 768px)
+{
+  .formio-form .choices__item.choices__item--selectable {
+      font-size: 14px;
+      opacity: 1;
+  }
+}
+
+.formio-form .choices__item.choices__item--selectable {
+  white-space: nowrap;
+  overflow: inherit!important;
+  padding-right: 25px;
+  text-overflow: ellipsis;
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 1;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body { font-family: sans-serif; }
+
+.gallery {
+  background: #EEE;
+}
+
+.gallery-cell {
+  width: 28%;
+  height: 200px;
+  margin-right: 10px;
+  background: #8C8;
+  counter-increment: gallery-cell;
+}
+
+.gallery-cell.is-selected {
+  background: #ED2;
+}
+
+/* cell number */
+.gallery-cell:before {
+  display: block;
+  text-align: center;
+  content: counter(gallery-cell);
+  line-height: 200px;
+  font-size: 80px;
+  color: white;
+}
+
+// Resources
+
+
+//Carousel CSS
+.demo {overflow: visible; height: 100px;z-index: 3;}
+.carousel {
+  // color: #FFF;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: initial;
+}
+.carousel .c-item {
+  display: inline-block;
+  width: 35%;
+  @media (min-width: 768px)
+  {
+    width: 7%;
+  }
+  background: #ffff;
+  height: 100px;
+}
+
+
+
+
+
+.tab {
+  overflow: hidden;
+  background-color: white;
+
+}
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 18px 25px 18px 25px;
+  transition: 0.3s;
+  font-size: 15px;
+}
+
+.tab button.active {
+    border: 2px solid rgb(32, 74, 214);
+    background-color: rgb(253, 252, 252);
+}
+
+.tabcontent {
+  // display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 2px 2px rgb(199, 199, 199);
+}
+
+.search {
+  width: 100%;
+  border: 1px solid #494b4b;
+  position: relative;
+  display: flex;
+  border-radius: 4px;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 0px;
+  padding: 5px;
+  height: auto;
+  outline: none;
+  border-right: 1px solid grey;
+}
+
+.searchButton {
+  width: 40px;
+  height: 40px;
+  border: 0px;
+  text-align: center;
+  background-color: white;
+  font-size: 25px;
+  border-radius: 4px;
+}
+
+.wrap{
+  width: 40%;
+}
+
+.bodyOfdiv {
+  background-color: white;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  box-sizing: border-box;
+
+}
+
+.card {
+  background: linear-gradient(-45deg, #e5e5f1, #c3e6fa);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1); 
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* hide limit values on X axis */
+.card #canvas {
+  margin-left: -30px;
+  margin-right: -30px;
+  width: 360px!important;
+}
+
+.card .about {
+  height: 185px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.card .about h3,
+.card .about .lead {
+  margin-top: 0px;
+  margin-bottom: 0;
+  font-weight: 400;
+}
+
+.card .about h3 {
+  font-size: 24px;
+  color: black;
+}
+
+.card .about .lead {
+  color: #494b4b;
+}
+
+.card .info {
+  float: left;
+  padding: 10px 30px 10px 0;
+}
+
+.card .info p {
+  font-size: 11px;
+  color:black;
+  font-weight: 300;
+}
+
+.legends {
+  padding-top: 20px;
+  overflow: hidden;
+}
+
+.legend {
+  display: block;
+  width: 8px;
+  height: 8px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 50%;
+}
+
+.legend--this {
+  background-color: #e4e4f5;
+}
+
+.legend--prev {
+  background-color: #e4e2e3;
+}
+
+.axis {
+  position: absolute;
+  color:#494b4b;
+  z-index: 1;
+  text-transform: uppercase;
+  display: flex;
+  width: 100%;
+  bottom: 0;
+}
+
+.axis .tick {
+  flex: 1;
+  position: relative;
+  font-size: 11px;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 20px;
+}
+
+.axis .tick::after {
+  content: "";
+  position: absolute;
+  display: block;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.axis .tick .value {
+  transform: translateY(-240px);
+  opacity: 0;
+  transition: all 0.3s;
+  position: absolute;
+  top: 20px;
+  left: 0;
+  color:black;
+  border-radius: 2px;
+  width: 100%;
+  line-height: 20px;
+}
+
+.axis .tick:hover .value.value--this {
+  transform: translateY(-160px);
+  display: block;
+  opacity: 0.4;
+}
+
+.value.value--this {
+  color:black;
+  font-weight: bold;
+}
+
+.day-number {
+  display: block;
+}
+
+.day-name {
+  display: block;
+  opacity: 0.4;
+}
+
+/* Animated background, credits: Manuel Pinto, https://codepen.io/P1N2O/pen/pyBNzX */
+.card {
+  background: linear-gradient(-45deg,white,rgb(247, 245, 245), white,rgb(251, 255, 255));
+  background-size: 400% 400%;
+  animation: bg 20s infinite;
+}
+
+.boxes{
+  padding: 50px;
+}
+.innerbox{
+  background-color: #f5fbff;
+  padding: 20px;
 }

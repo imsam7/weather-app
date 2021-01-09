@@ -1,8 +1,13 @@
 import { serviceHelper } from './util/serviceHelper';
 
 // All api calls
-export const getUserCity = () => {
-    return serviceHelper.get("http://ip-api.com/json")
+
+export const getIP = () => {
+    return serviceHelper.get("https://api.ipify.org/?format=json")
+}
+
+export const getUserCity = (ip) => {
+    return serviceHelper.get("https://ipinfo.io/" + ip + "?token=6dcd47678854be")
 }
 
 export const getWeather = (cityName) => {
