@@ -14,6 +14,47 @@ class WeatherHomeContainer extends React.Component {
     }
 
     componentDidMount(e) {
+        const json = {
+            "display": "form",
+            "settings": {
+                "pdf": {
+                    "id": "1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
+                    "src": "https://files.form.io/pdf/5692b91fd1028f01000407e3/file/1ec0f8ee-6685-5d98-a847-26f67b67d6f0"
+                }
+            },
+            "components": [
+                {
+                    "label": "Select",
+                    "tableView": true,
+                    "data": {
+                        "values": [
+                            {
+                                "label": "",
+                                "value": ""
+                            }
+                        ]
+                    },
+                    "selectThreshold": 0.3,
+                    "validate": {
+                        "onlyAvailableItems": false
+                    },
+                    "key": "select",
+                    "type": "select",
+                    "indexeddb": {
+                        "filter": {}
+                    },
+                    "input": true
+                },
+                {
+                    "type": "button",
+                    "label": "Submit",
+                    "key": "submit",
+                    "disableOnInvalid": true,
+                    "input": true,
+                    "tableView": false
+                }
+            ]
+        }
         // e.preventDefault()
         // const { username } = this.props.match.params
         // this.props.dispatch(loadUserCity({ userName: 'imsam7' }))
@@ -24,7 +65,8 @@ class WeatherHomeContainer extends React.Component {
     render() {
         // if (this.props.followersData.loading)
         //     return <Loader />
-        return <Form src="https://example.form.io/example" onSubmit={console.log} />
+        // return <h1>Hello</h1>
+        // return <Form src="json" onSubmit={console.log} />
         return <SearchBar id="autocomplete" placeholder="Search City" hintText="Search City"
             style={{
                 margin: '0 auto',
