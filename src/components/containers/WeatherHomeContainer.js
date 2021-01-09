@@ -21,7 +21,7 @@ class WeatherHomeContainer extends React.Component {
     }
 
     componentDidMount() {
-        // this.props.dispatch(loadUserCity())
+        this.props.dispatch(loadUserCity())
     }
 
     componentWillReceiveProps(nextProps) {
@@ -30,12 +30,13 @@ class WeatherHomeContainer extends React.Component {
     }
 
     render() {
-        // if (this.props.followersData.loading)
-        //     return <Loader />
-        return <>
-            <Form form={form} onChange={this.cityChange} />
-            <WeatherHomeLayout userCityData={this.props.userCityData} />
-        </>
+        if (this.props.weatherData.loading)
+            return <Loader />
+        else
+            return <>
+                <Form form={form} onChange={this.cityChange} />
+                <WeatherHomeLayout weatherData={this.props.weatherData} />
+            </>
     }
 }
 

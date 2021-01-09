@@ -1,24 +1,23 @@
-import SearchBar from 'material-ui-search-bar';
-
-function WeatherHomeLayout({ userCityData }) {
+function WeatherHomeLayout({ weatherData }) {
+    console.log(weatherData.weather)
     return (
-        <div className="cUWXFh ">
+        <div className="">
 
             <div>
-                <h1 className="">Followers</h1>
+                <h1>{weatherData.weather.city.name}</h1>
             </div>
-
-            <form class="form " role="search">
-                <div class="input-group">
-                    <input class="form-control" placeholder="Enter City" name="srch-term" id="srch-term" type="text" />
-                    <div class="input-group-btn">
-                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                    </div>
-                </div>
-            </form>
-
+            humidity
+            <h3>{weatherData.weather.list[0].main.humidity} %</h3>
             
-
+            pressure
+            <h3>{weatherData.weather.list[0].main.pressure} hpa</h3>
+            
+            sunrise
+            <h3>{weatherData.weather.city.sunrise}</h3>
+            
+            sunset
+            <h3>{weatherData.weather.city.sunset}</h3>
+            
             {/* <div className="">
                 {followersData.map((follower) => (
                     <div className="card">
