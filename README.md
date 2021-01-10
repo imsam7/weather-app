@@ -1,7 +1,7 @@
 A react-redux project with sagas.
 Gives weather and forecast of the past 5 days. On landing, weather shown is for the city you are in currently. 
-It also has a search bar for cities.
-
+It also has a search bar for cities. 
+Find the demo of the project [here](https://imsam7.github.io/weather-app/)
 Using:
 chartjs for graphs.
 ipify to get IP Address.
