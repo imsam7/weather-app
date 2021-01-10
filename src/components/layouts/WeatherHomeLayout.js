@@ -1,6 +1,7 @@
 import sun from '../../assets/img/sun.png'
 import cloudy from '../../assets/img/cloudy.png'
 import React, { useState } from 'react';
+import { Line } from 'react-chartjs-2';
 
 function WeatherHomeLayout({ weatherData }) {
     let sunriseTime = epochtoDate(weatherData.weather.city.sunrise)
@@ -51,10 +52,10 @@ function WeatherHomeLayout({ weatherData }) {
             <div className="demo">
                 <div className="carousel">
                     {weatherDataDayWise.map((weatherDetails, index) => (
-                        <div className="tablinks c-item" onClick={() => sadsalement(index)}>
+                        <div className="tablinks c-item active" onClick={() => sadsalement(index)}>
                             <div>
                                 <b>Mon</b><br />
-                                <b>{kelvinToCelcius(weatherDetails.main.temp_max)}°C <span style={{ color: "rgb(167, 165, 165)" }}>{kelvinToCelcius(weatherDetails.main.temp_min)}°C </span></b><br />
+                                <b>{kelvinToCelcius(weatherDetails.main.temp_max)}° <span style={{ color: "rgb(167, 165, 165)" }}>{kelvinToCelcius(weatherDetails.main.temp_min)}° </span></b><br />
                                 {weatherDetails.weather[0].main == 'Clear' && <img src={sun} width="24px" height="25px" />}
                                 {weatherDetails.weather[0].main == 'Clouds' && <img src={cloudy} width="24px" height="25px" />}
                                 <br />
@@ -83,8 +84,19 @@ function WeatherHomeLayout({ weatherData }) {
 
                         <canvas id="canvas"></canvas>
 
-                        <div className="axis">
-                            <div className="tick">
+                        <div className="axis graph">
+                            <Line
+                                data={{
+                                    labels: weatherData.weather.list.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp)),
+                                    datasets: [{
+                                        data: weatherData.weather.list.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp)),
+                                        label: 'Infected',
+                                        borderColor: '#3333ff',
+                                        fill: true
+                                    }]
+                                }}
+                            />
+                            {/* <div className="tick">
                                 <span className="day-number">10</span>
                                 <span className="day-name">12pm</span>
                                 <span className="value value--this">26°C</span>
@@ -118,32 +130,32 @@ function WeatherHomeLayout({ weatherData }) {
                                 <span className="day-number">16</span>
                                 <span className="day-name">6pm</span>
                                 <span className="value value--this">18°C</span>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
                 <br />
                 <div style={{ display: "flex" }}>
-                    <div className="card" style={{ width: "50%", flex: "1", marginRight: "20px" }}>
-                        <div className="about" style={{ height: "auto", paddingTop: "10px" }}>
+                    <div className="" style={{ width: "50%", flex: "1" }}>
+                        <div className="innerbox" style={{ height: "auto", paddingTop: "10px", marginRight: "8px" }}>
                             <p><b>Pressure</b><br />{showWeatherDetails.main.pressure} hpa</p>
                         </div>
                     </div>
-                    <div className="card" style={{ width: "50%", flex: "1" }}>
-                        <div className="about" style={{ height: "auto", paddingTop: "10px" }}>
+                    <div className="" style={{ width: "50%", flex: "1" }}>
+                        <div className="innerbox" style={{ height: "auto", paddingTop: "10px", marginRight: "8px" }}>
                             <p><b>Humidity</b><br />{showWeatherDetails.main.humidity} hpa</p>
                         </div>
                     </div>
                 </div>
                 <br />
-                <div style={{ display: "flex" }}>
-                    <div className="card" style={{ width: "50%", flex: "1", marginRight: "20px" }}>
-                        <div className="about" style={{ height: "auto", paddingTop: "10px" }}>
+                <div style={{ display: "flex", marginTop: "-20px" }}>
+                    <div className="boxes" style={{ width: "50%", flex: "1" }}>
+                        <div className="innerbox" style={{ height: "auto", paddingTop: "0px", marginRight: "40px", marginBottom: "5px", backgroundColor: "white" }}>
                             <p><b>Sunrise</b><br />{sunriseTime}</p>
                         </div>
                     </div>
-                    <div className="card" style={{ width: " 50%", flex: "1", height: "auto" }}>
-                        <div className="about" style={{ height: "auto", paddingTop: "10px" }}>
+                    <div className="" style={{ width: " 50%", flex: "1", height: "auto" }}>
+                        <div className="innerbox" style={{ height: "auto", paddingTop: "0px", marginLeft: "40px", marginBottom: "5px", backgroundColor: "white" }}>
                             <p><b>Sunrise</b><br />{sunsetTime}</p>
                         </div>
                     </div>
