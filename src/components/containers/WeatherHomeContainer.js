@@ -8,6 +8,7 @@ import Loader from '../../shared/components/loader'
 import SearchBar from 'material-ui-search-bar';
 import { Form } from 'react-formio';
 import { form } from '../../assets/form'
+import FormioUtils from 'formiojs/utils';
 
 class WeatherHomeContainer extends React.Component {
     constructor(props) {
@@ -25,8 +26,9 @@ class WeatherHomeContainer extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.userCityData.userCityDetails.city !== this.props.userCityData.userCityDetails.city)
+        if (nextProps.userCityData.userCityDetails.city !== this.props.userCityData.userCityDetails.city) {
             this.props.dispatch(loadWeather({ city: nextProps.userCityData.userCityDetails.city }))
+        }
     }
 
     render() {

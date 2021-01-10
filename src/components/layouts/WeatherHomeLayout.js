@@ -7,17 +7,28 @@ function WeatherHomeLayout({ weatherData }) {
     let sunriseTime = epochtoDate(weatherData.weather.city.sunrise)
     let sunsetTime = epochtoDate(weatherData.weather.city.sunset)
     var weatherDataDayWise = []
-    var time
+    var tempDailyWeatherDayWise = []
     for (var i = 0; i < weatherData.weather.list.length; i++) {
+        if (i < 8)
+            tempDailyWeatherDayWise.push(weatherData.weather.list[i])
         if (i % 8 == 0) {
             weatherDataDayWise.push(weatherData.weather.list[i])
         }
     }
     const [showWeatherDetails, setShowWeatherDetails] = useState(weatherDataDayWise[0]);
-    var last5Days =  Last5Days()
+    const [dailyWeatherDayWise, setDailyWeatherDayWise] = useState(tempDailyWeatherDayWise);
+    const [carouselIndex, setCarouselIndex] = useState(0);
+    var last5Days = Last5Days()
 
     function getWeatherDataDayWise(index) {
         setShowWeatherDetails(weatherDataDayWise[index])
+        var tempDailyWeatherDayWise = []
+        for (var i = index * 8; i < index * 8 + 8; i++) {
+            // if (i < 8)
+            tempDailyWeatherDayWise.push(weatherData.weather.list[i])
+        }
+        setDailyWeatherDayWise(tempDailyWeatherDayWise)
+        setCarouselIndex(index)
     }
 
     function epochtoDate(epoch) {
@@ -53,7 +64,7 @@ function WeatherHomeLayout({ weatherData }) {
             <div className="demo">
                 <div className="carousel">
                     {weatherDataDayWise.map((weatherDetails, index) => (
-                        <div className="tablinks c-item active" onClick={() => getWeatherDataDayWise(index)}>
+                        <div className={"tablinks c-item"} onClick={() => getWeatherDataDayWise(index)}>
                             <div>
                                 <b>{last5Days[index]}</b><br />
                                 <b>{kelvinToCelcius(weatherDetails.main.temp_max)}° <span style={{ color: "rgb(167, 165, 165)" }}>{kelvinToCelcius(weatherDetails.main.temp_min)}° </span></b><br />
@@ -83,9 +94,8 @@ function WeatherHomeLayout({ weatherData }) {
                             </div>
                         </div>
 
-                        {/* <canvas id="canvas"></canvas> */}
-
                         <div className="axis graph">
+
                             <Line
                                 options={
                                     {
@@ -112,15 +122,16 @@ function WeatherHomeLayout({ weatherData }) {
                                     }
                                 }
                                 data={{
-                                    labels: weatherData.weather.list.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp) + "°C"),
+                                    labels: dailyWeatherDayWise.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp) + "°C"),
                                     datasets: [{
-                                        data: weatherData.weather.list.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp)),
+                                        data: dailyWeatherDayWise.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp)),
                                         label: 'Infected',
                                         borderColor: '#3333ff',
                                         fill: true
                                     }]
                                 }}
                             />
+
                         </div>
                     </div>
                 </div>
