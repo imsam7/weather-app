@@ -7,14 +7,16 @@ function WeatherHomeLayout({ weatherData }) {
     let sunriseTime = epochtoDate(weatherData.weather.city.sunrise)
     let sunsetTime = epochtoDate(weatherData.weather.city.sunset)
     var weatherDataDayWise = []
+    var time
     for (var i = 0; i < weatherData.weather.list.length; i++) {
         if (i % 8 == 0) {
             weatherDataDayWise.push(weatherData.weather.list[i])
         }
     }
     const [showWeatherDetails, setShowWeatherDetails] = useState(weatherDataDayWise[0]);
+    var last5Days =  Last5Days()
 
-    function sadsalement(index) {
+    function getWeatherDataDayWise(index) {
         setShowWeatherDetails(weatherDataDayWise[index])
     }
 
@@ -37,24 +39,23 @@ function WeatherHomeLayout({ weatherData }) {
             return 'Cloudy'
     }
 
-    // function getForecastImage(forecast) {
-    //     // if (forecast == 'Rain')
-    //     //     return Sun
-    //     // else 
-    //     if (forecast == 'Clear')
-    //         return 'Sunny'
-    //     else if (forecast == 'Clouds')
-    //         return 'Cloudy'
-    // }
+    function Last5Days() {
+        var result = [];
+        for (var i = 0; i < 5; i++) {
+            var d = new Date();
+            result.push(d.toString().split(' ')[0])
+        }
+        return (result);
+    }
 
     return (
         <div className="">
             <div className="demo">
                 <div className="carousel">
                     {weatherDataDayWise.map((weatherDetails, index) => (
-                        <div className="tablinks c-item active" onClick={() => sadsalement(index)}>
+                        <div className="tablinks c-item active" onClick={() => getWeatherDataDayWise(index)}>
                             <div>
-                                <b>Mon</b><br />
+                                <b>{last5Days[index]}</b><br />
                                 <b>{kelvinToCelcius(weatherDetails.main.temp_max)}° <span style={{ color: "rgb(167, 165, 165)" }}>{kelvinToCelcius(weatherDetails.main.temp_min)}° </span></b><br />
                                 {weatherDetails.weather[0].main == 'Clear' && <img src={sun} width="24px" height="25px" />}
                                 {weatherDetails.weather[0].main == 'Clouds' && <img src={cloudy} width="24px" height="25px" />}
@@ -82,12 +83,36 @@ function WeatherHomeLayout({ weatherData }) {
                             </div>
                         </div>
 
-                        <canvas id="canvas"></canvas>
+                        {/* <canvas id="canvas"></canvas> */}
 
                         <div className="axis graph">
                             <Line
+                                options={
+                                    {
+                                        tooltips: {
+                                            enabled: false,
+                                        },
+                                        legend: {
+                                            display: false
+                                        }, scales:
+                                        {
+                                            yAxes: [{
+                                                display: false,
+                                                gridLines: {
+                                                    drawBorder: false,
+                                                    display: false
+                                                }
+                                            }],
+                                            xAxes: [{
+                                                gridLines: {
+                                                    display: false,
+                                                },
+                                            }],
+                                        }
+                                    }
+                                }
                                 data={{
-                                    labels: weatherData.weather.list.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp)),
+                                    labels: weatherData.weather.list.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp) + "°C"),
                                     datasets: [{
                                         data: weatherData.weather.list.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp)),
                                         label: 'Infected',
@@ -96,41 +121,6 @@ function WeatherHomeLayout({ weatherData }) {
                                     }]
                                 }}
                             />
-                            {/* <div className="tick">
-                                <span className="day-number">10</span>
-                                <span className="day-name">12pm</span>
-                                <span className="value value--this">26°C</span>
-                            </div>
-                            <div className="tick">
-                                <span className="day-number">11</span>
-                                <span className="day-name">1pm</span>
-                                <span className="value value--this">14°C</span>
-                            </div>
-                            <div className="tick">
-                                <span className="day-number">12</span>
-                                <span className="day-name">2pm</span>
-                                <span className="value value--this">22°C</span>
-                            </div>
-                            <div className="tick">
-                                <span className="day-number">13</span>
-                                <span className="day-name">3pm</span>
-                                <span className="value value--this">12°C</span>
-                            </div>
-                            <div className="tick">
-                                <span className="day-number">14</span>
-                                <span className="day-name">4pm</span>
-                                <span className="value value--this">20°C</span>
-                            </div>
-                            <div className="tick">
-                                <span className="day-number">15</span>
-                                <span className="day-name">5pm</span>
-                                <span className="value value--this">12°C</span>
-                            </div>
-                            <div className="tick">
-                                <span className="day-number">16</span>
-                                <span className="day-name">6pm</span>
-                                <span className="value value--this">18°C</span>
-                            </div> */}
                         </div>
                     </div>
                 </div>

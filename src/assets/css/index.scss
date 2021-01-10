@@ -385,9 +385,9 @@ body { font-family: sans-serif; }
   box-sizing: border-box;
 }
 @media(min-width:632px){
-  .card .about{
-    height: 768px;
-  }
+  // .card .about{
+  //   height: 768px;
+  // }
 }
 
 .card .about h3,
@@ -440,7 +440,7 @@ body { font-family: sans-serif; }
 }
 
 .axis {
-  position: absolute;
+  // position: absolute;
   color:#494b4b;
   z-index: 1;
   text-transform: uppercase;
