@@ -11,7 +11,7 @@ function WeatherHomeLayout({ weatherData }) {
     for (var i = 0; i < weatherData.weather.list.length; i++) {
         if (i < 8)
             tempDailyWeatherDayWise.push(weatherData.weather.list[i])
-        if (i % 8 == 0) {
+        if (i % 8 === 0) {
             weatherDataDayWise.push(weatherData.weather.list[i])
         }
     }
@@ -19,6 +19,7 @@ function WeatherHomeLayout({ weatherData }) {
     const [dailyWeatherDayWise, setDailyWeatherDayWise] = useState(tempDailyWeatherDayWise);
     const [carouselIndex, setCarouselIndex] = useState(0);
     var last5Days = Last5Days()
+
 
     function getWeatherDataDayWise(index) {
         setShowWeatherDetails(weatherDataDayWise[index])
@@ -54,9 +55,28 @@ function WeatherHomeLayout({ weatherData }) {
         var result = [];
         for (var i = 0; i < 5; i++) {
             var d = new Date();
+            d.setDate(d.getDate() + i)
             result.push(d.toString().split(' ')[0])
         }
         return (result);
+    }
+
+    function getMinTemp(index) {
+        var temp1 = weatherData.weather.list[index * 8].main.temp
+        for (var i = index * 8; i < index * 8 + 8; i++) {
+            if (weatherData.weather.list[i].main.temp < temp1)
+                temp1 = weatherData.weather.list[i].main.temp
+        }
+        return temp1
+    }
+
+    function getMaxTemp(index) {
+        var temp2 = weatherData.weather.list[index * 8].main.temp
+        for (var i = index * 8; i < index * 8 + 8; i++) {
+            if (weatherData.weather.list[i].main.temp > temp2)
+                temp2 = weatherData.weather.list[i].main.temp
+        }
+        return temp2
     }
 
     return (
@@ -64,10 +84,10 @@ function WeatherHomeLayout({ weatherData }) {
             <div className="demo">
                 <div className="carousel">
                     {weatherDataDayWise.map((weatherDetails, index) => (
-                        <div className={"tablinks c-item"} onClick={() => getWeatherDataDayWise(index)}>
+                        <div className={"tablinks c-item " + (carouselIndex === index ? 'active': '')} onClick={() => getWeatherDataDayWise(index)}>
                             <div>
                                 <b>{last5Days[index]}</b><br />
-                                <b>{kelvinToCelcius(weatherDetails.main.temp_max)}° <span style={{ color: "rgb(167, 165, 165)" }}>{kelvinToCelcius(weatherDetails.main.temp_min)}° </span></b><br />
+                                <b>{kelvinToCelcius(getMaxTemp(index))}° <span style={{ color: "rgb(167, 165, 165)" }}>{kelvinToCelcius(getMinTemp(index))}° </span></b><br />
                                 {weatherDetails.weather[0].main == 'Clear' && <img src={sun} width="24px" height="25px" />}
                                 {weatherDetails.weather[0].main == 'Clouds' && <img src={cloudy} width="24px" height="25px" />}
                                 <br />
@@ -80,60 +100,56 @@ function WeatherHomeLayout({ weatherData }) {
 
             <div id="Mon1" className="tabcontent">
                 <div className="bodyOfdiv">
-                    <div className="card">
-                        <div className="about">
-                            {/* <h3><b>{weatherData.weather.city.name}</b></h3> */}
-                            <div style={{ display: "flex", flexWrap: "wrap" }}>
+                    <center>
+                        <div className="card">
+                            <div className="about">
+                                {/* <h3><b>{weatherData.weather.city.name}</b></h3> */}
+                                <div style={{ display: "flex", flexWrap: "wrap" }}>
 
-                                <h1 style={{ fontSize: "50px", marginTop: "0px", marginBottom: "0px", marginRight: "15px" }} >
-                                    <b>{kelvinToCelcius(showWeatherDetails.main.temp)}°C</b></h1>
+                                    <h1 style={{ fontSize: "50px", marginTop: "0px", marginBottom: "0px", marginRight: "15px" }} >
+                                        <b>{kelvinToCelcius(showWeatherDetails.main.temp)}°C</b></h1>
 
-                                {showWeatherDetails.weather[0].main == 'Clear' && <img src={sun} style={{ height: "50px", width: "50px" }} />}
-                                {showWeatherDetails.weather[0].main == 'Clouds' && <img src={cloudy} style={{ height: "50px", width: "50px" }} />}
+                                    {showWeatherDetails.weather[0].main == 'Clear' && <img src={sun} style={{ height: "50px", width: "50px" }} />}
+                                    {showWeatherDetails.weather[0].main == 'Clouds' && <img src={cloudy} style={{ height: "50px", width: "50px" }} />}
 
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="axis graph">
+                            <div className="axis graph">
 
-                            <Line
-                                options={
-                                    {
-                                        tooltips: {
-                                            enabled: false,
-                                        },
-                                        legend: {
-                                            display: false
-                                        }, scales:
+                                <Line
+                                    options={{
+                                        tooltips: { enabled: false, },
+                                        legend: { display: false }, scales:
                                         {
                                             yAxes: [{
                                                 display: false,
                                                 gridLines: {
                                                     drawBorder: false,
                                                     display: false
+                                                },
+                                                ticks: {
+                                                    beginAtZero: true,
+                                                    min: 0,
+                                                    max: 50
                                                 }
                                             }],
-                                            xAxes: [{
-                                                gridLines: {
-                                                    display: false,
-                                                },
-                                            }],
+                                            xAxes: [{ gridLines: { display: false, }, }],
                                         }
-                                    }
-                                }
-                                data={{
-                                    labels: dailyWeatherDayWise.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp) + "°C"),
-                                    datasets: [{
-                                        data: dailyWeatherDayWise.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp)),
-                                        label: 'Infected',
-                                        borderColor: '#3333ff',
-                                        fill: true
-                                    }]
-                                }}
-                            />
-
+                                    }}
+                                    data={{
+                                        labels: dailyWeatherDayWise.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp) + "°C"),
+                                        datasets: [{
+                                            data: dailyWeatherDayWise.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp)),
+                                            label: 'Temp',
+                                            borderColor: '#3498DB',
+                                            fill: false
+                                        }]
+                                    }}
+                                />
+                            </div>
                         </div>
-                    </div>
+                    </center>
                 </div>
                 <br />
                 <div style={{ display: "flex" }}>
@@ -144,7 +160,7 @@ function WeatherHomeLayout({ weatherData }) {
                     </div>
                     <div className="" style={{ width: "50%", flex: "1" }}>
                         <div className="innerbox" style={{ height: "auto", paddingTop: "10px", marginRight: "8px" }}>
-                            <p><b>Humidity</b><br />{showWeatherDetails.main.humidity} hpa</p>
+                            <p><b>Humidity</b><br />{showWeatherDetails.main.humidity} %</p>
                         </div>
                     </div>
                 </div>
@@ -157,7 +173,7 @@ function WeatherHomeLayout({ weatherData }) {
                     </div>
                     <div className="" style={{ width: " 50%", flex: "1", height: "auto" }}>
                         <div className="innerbox" style={{ height: "auto", paddingTop: "0px", marginLeft: "40px", marginBottom: "5px", backgroundColor: "white" }}>
-                            <p><b>Sunrise</b><br />{sunsetTime}</p>
+                            <p><b>Sunset</b><br />{sunsetTime}</p>
                         </div>
                     </div>
                 </div>
