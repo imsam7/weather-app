@@ -4,32 +4,72 @@ import React, { useState } from 'react';
 import { Line } from 'react-chartjs-2';
 
 function WeatherHomeLayout({ weatherData }) {
+    var DayWiselist = []
+    var temp = []
+    var timeArray = ["12 am", " 3 am", "6 am", "9 am", "12 pm", " 3 pm", "6 pm", "9 pm"]
+    var tempTimeArray = []
+    var last5Days = Last5Days()
     let sunriseTime = epochtoDate(weatherData.weather.city.sunrise)
     let sunsetTime = epochtoDate(weatherData.weather.city.sunset)
-    var weatherDataDayWise = []
-    var tempDailyWeatherDayWise = []
-    for (var i = 0; i < weatherData.weather.list.length; i++) {
-        if (i < 8)
-            tempDailyWeatherDayWise.push(weatherData.weather.list[i])
-        if (i % 8 === 0) {
-            weatherDataDayWise.push(weatherData.weather.list[i])
+    var today = new Date();
+    var hour = Math.round((24 - today.getHours()) / 3)
+
+    if (hour == 0)
+        hour++
+
+    for (var i = 0; i < hour; i++) {
+        temp.push(weatherData.weather.list[i])
+        tempTimeArray.push(timeArray[timeArray.length - i - 1])
+    }
+    DayWiselist.push(temp)
+    temp = []
+    var j = 0;
+    for (var i = hour; i < weatherData.weather.list.length; i++) {
+        j++
+        temp.push(weatherData.weather.list[i])
+        if (j % 8 === 0) {
+            DayWiselist.push(temp)
+            temp = []
         }
     }
-    const [showWeatherDetails, setShowWeatherDetails] = useState(weatherDataDayWise[0]);
-    const [dailyWeatherDayWise, setDailyWeatherDayWise] = useState(tempDailyWeatherDayWise);
-    const [carouselIndex, setCarouselIndex] = useState(0);
-    var last5Days = Last5Days()
 
+    const [currentWeatherDetails, setcurrentWeatherDetails] = useState(DayWiselist[0][0]);
+    const [timeStamps, setTimeStamps] = useState(tempTimeArray);
+    const [dailyWeatherDayWise, setDailyWeatherDayWise] = useState(DayWiselist[0]);
+    const [carouselIndex, setCarouselIndex] = useState(0);
 
     function getWeatherDataDayWise(index) {
-        setShowWeatherDetails(weatherDataDayWise[index])
-        var tempDailyWeatherDayWise = []
-        for (var i = index * 8; i < index * 8 + 8; i++) {
-            // if (i < 8)
-            tempDailyWeatherDayWise.push(weatherData.weather.list[i])
-        }
-        setDailyWeatherDayWise(tempDailyWeatherDayWise)
+        setcurrentWeatherDetails(DayWiselist[index][0])
+        setDailyWeatherDayWise(DayWiselist[index])
         setCarouselIndex(index)
+        if (index != 0)
+            setTimeStamps(timeArray)
+    }
+
+    function getWeatherDataDayWiseMain(index) {
+        var temp1 = DayWiselist[index]
+        var min = temp1[0].weather[0].main
+        return min
+    }
+
+    function getMinTemp(index) {
+        var temp1 = DayWiselist[index]
+        var min = temp1[0].main.temp
+        for (var i = 0; i < temp1.length; i++) {
+            if (temp1[i].main.temp < min)
+                min = temp1[i].main.temp
+        }
+        return min
+    }
+
+    function getMaxTemp(index) {
+        var temp2 = DayWiselist[index]
+        var max = temp2[0].main.temp
+        for (var i = 0; i < temp2.length; i++) {
+            if (temp2[i].main.temp > max)
+                max = temp2[i].main.temp
+        }
+        return max
     }
 
     function epochtoDate(epoch) {
@@ -61,37 +101,19 @@ function WeatherHomeLayout({ weatherData }) {
         return (result);
     }
 
-    function getMinTemp(index) {
-        var temp1 = weatherData.weather.list[index * 8].main.temp
-        for (var i = index * 8; i < index * 8 + 8; i++) {
-            if (weatherData.weather.list[i].main.temp < temp1)
-                temp1 = weatherData.weather.list[i].main.temp
-        }
-        return temp1
-    }
-
-    function getMaxTemp(index) {
-        var temp2 = weatherData.weather.list[index * 8].main.temp
-        for (var i = index * 8; i < index * 8 + 8; i++) {
-            if (weatherData.weather.list[i].main.temp > temp2)
-                temp2 = weatherData.weather.list[i].main.temp
-        }
-        return temp2
-    }
-
     return (
         <div className="">
             <div className="demo">
                 <div className="carousel">
-                    {weatherDataDayWise.map((weatherDetails, index) => (
-                        <div className={"tablinks c-item " + (carouselIndex === index ? 'active': '')} onClick={() => getWeatherDataDayWise(index)}>
+                    {DayWiselist.map((weatherDetails, index) => (
+                        <div className={"tablinks c-item " + (carouselIndex === index ? 'active' : '')} onClick={() => getWeatherDataDayWise(index)}>
                             <div>
                                 <b>{last5Days[index]}</b><br />
                                 <b>{kelvinToCelcius(getMaxTemp(index))}° <span style={{ color: "rgb(167, 165, 165)" }}>{kelvinToCelcius(getMinTemp(index))}° </span></b><br />
-                                {weatherDetails.weather[0].main == 'Clear' && <img src={sun} width="24px" height="25px" />}
-                                {weatherDetails.weather[0].main == 'Clouds' && <img src={cloudy} width="24px" height="25px" />}
+                                {getWeatherDataDayWiseMain(index) == 'Clear' && <img src={sun} width="24px" height="25px" />}
+                                {getWeatherDataDayWiseMain(index) == 'Clouds' && <img src={cloudy} width="24px" height="25px" />}
                                 <br />
-                                <b style={{ color: "rgb(167, 165, 165)" }}>{getForecast(weatherDetails.weather[0].main)}</b><br />
+                                <b style={{ color: "rgb(167, 165, 165)" }}>{getForecast(getWeatherDataDayWiseMain(index))}</b><br />
                             </div>
                         </div>
                     ))}
@@ -107,38 +129,36 @@ function WeatherHomeLayout({ weatherData }) {
                                 <div style={{ display: "flex", flexWrap: "wrap" }}>
 
                                     <h1 style={{ fontSize: "50px", marginTop: "0px", marginBottom: "0px", marginRight: "15px" }} >
-                                        <b>{kelvinToCelcius(showWeatherDetails.main.temp)}°C</b></h1>
+                                        <b>{kelvinToCelcius(currentWeatherDetails.main.temp)}°C</b></h1>
 
-                                    {showWeatherDetails.weather[0].main == 'Clear' && <img src={sun} style={{ height: "50px", width: "50px" }} />}
-                                    {showWeatherDetails.weather[0].main == 'Clouds' && <img src={cloudy} style={{ height: "50px", width: "50px" }} />}
+                                    {currentWeatherDetails.weather[0].main == 'Clear' && <img src={sun} style={{ height: "50px", width: "50px" }} />}
+                                    {currentWeatherDetails.weather[0].main == 'Clouds' && <img src={cloudy} style={{ height: "50px", width: "50px" }} />}
 
                                 </div>
                             </div>
 
                             <div className="axis graph">
 
-                                <Line
-                                    options={{
-                                        tooltips: { enabled: false, },
-                                        legend: { display: false }, scales:
-                                        {
-                                            yAxes: [{
-                                                display: false,
-                                                gridLines: {
-                                                    drawBorder: false,
-                                                    display: false
-                                                },
-                                                ticks: {
-                                                    beginAtZero: true,
-                                                    min: 0,
-                                                    max: 50
-                                                }
-                                            }],
-                                            xAxes: [{ gridLines: { display: false, }, }],
-                                        }
-                                    }}
+                                <Line options={{
+                                    tooltips: { enabled: false, }, legend: { display: false }, scales:
+                                    {
+                                        yAxes: [{
+                                            display: false,
+                                            gridLines: {
+                                                drawBorder: false,
+                                                display: false
+                                            },
+                                            ticks: {
+                                                beginAtZero: true,
+                                                min: 0,
+                                                max: 50
+                                            }
+                                        }],
+                                        xAxes: [{ gridLines: { display: false, }, }],
+                                    }
+                                }}
                                     data={{
-                                        labels: dailyWeatherDayWise.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp) + "°C"),
+                                        labels: dailyWeatherDayWise.map((weatherDetails, index) => [kelvinToCelcius(weatherDetails.main.temp) + "°C", timeStamps[index]]),
                                         datasets: [{
                                             data: dailyWeatherDayWise.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp)),
                                             label: 'Temp',
@@ -155,12 +175,12 @@ function WeatherHomeLayout({ weatherData }) {
                 <div style={{ display: "flex" }}>
                     <div className="" style={{ width: "50%", flex: "1" }}>
                         <div className="innerbox" style={{ height: "auto", paddingTop: "10px", marginRight: "8px" }}>
-                            <p><b>Pressure</b><br />{showWeatherDetails.main.pressure} hpa</p>
+                            <p><b>Pressure</b><br />{currentWeatherDetails.main.pressure} hpa</p>
                         </div>
                     </div>
                     <div className="" style={{ width: "50%", flex: "1" }}>
                         <div className="innerbox" style={{ height: "auto", paddingTop: "10px", marginRight: "8px" }}>
-                            <p><b>Humidity</b><br />{showWeatherDetails.main.humidity} %</p>
+                            <p><b>Humidity</b><br />{currentWeatherDetails.main.humidity} %</p>
                         </div>
                     </div>
                 </div>
