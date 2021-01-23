@@ -1,19 +1,18 @@
-# A react-redux project with sagas.
+# A react-redux weather application
 
-Gives weather and forecast of the past 5 days. On landing, weather shown is for the city you are in currently. 
-It also has a search bar for cities. 
+Want to know weather forecast of the coming week? Want to see how weather changes throughout the day (preferably in a graphical representation) ? This application does exactly THAT.
 
-# Find the demo of the project [here](https://imsam7.github.io/weather-app/).
+Gives weather forecast of the coming week. 
+Auto detects the city you are residing in and shows weather details in a graphical representation.
+Forecast can be seen for other cities as well. 
 
-# Using:
+Find the demo of the project [here](https://imsam7.github.io/weather-app/).
 
+Using:
+OpenWeatherMapAPI to get weather forecast.
 chartjs for graphs.
-
 ipify to get IP Address.
-
 ipinfo to get city from IP Address.
-
-openweathermap to get weather details.
 
 # Getting Started with Create React App
 
