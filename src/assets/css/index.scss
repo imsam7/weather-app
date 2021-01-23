@@ -26,125 +26,20 @@ body
   }
 }
 
-.load
-    {
-      position: fixed;
-      height: 100%;
-      width: 100%;
-      background: rgba(245,247,248,8);
-      z-index: 1031;
-      left:0;
-      top:0;
-      bottom:0;
-    }  
-    
-    .lds-css
-    {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-    }  
-    
-    .lds-css + span
-    {
-      position: absolute;
-      top: 53%;
-      left: 50%;
-      color: #2f3542;
-      font-size: 12px;
-      transform: translateX(-50%);
-    }
-  
-    .lds-rolling{
-      width: 35px !important;
-      height: 35px !important;
-      -webkit-transform: translate(-17.5px,-17.5px) scale(0.175) translate(17.5px,17.5px);
-      transform: translate(-17.5px,-17.5px) scale(0.175) translate(17.5px,17.5px);
-    }
-  
-    .lds-rolling div, .lds-rolling div:after{
-      position: absolute;
-      height: 100px;
-      width: 100px;
-      border: 10px solid  #2f3542;
-      border-top-color: transparent;
-      border-radius: 50%;
-    }
-  
-    .lds-rolling div{
-      -webkit-animation: lds-rolling 1s linear infinite;
-      animation: lds-rolling 1s linear infinite;
-    }
-  
-    .lds-rolling div:after{
-      -webkit-transform: rotate(90deg);
-      transform: rotate(90deg);
-    }
-  
-    @keyframes lds-rolling{
-      0%
-      {
-          width: 35px !important;
-          height: 35px !important;
-          -webkit-transform: translate(-17.5px,-17.5px) scale(0.175) translate(17.5px,17.5px);
-          transform: translate(-17.5px,-17.5px) scale(0.175) translate(17.5px,17.5px);
-      }
-      100%
-      {
-          -webkit-transform: translate(-50%,-50%) rotate(360deg);
-          transform: translate(-50%,-50%) rotate(360deg);
-      }
-    }
-  
-    @-webkit-keyframes lds-rolling{
-      0%
-      {
-          -webkit-transform: translate(-50%,-50%) rotate(0deg);
-          transform: translate(-50%,-50%) rotate(0deg);
-      }
-      100%
-      {
-          -webkit-transform: translate(-50%,-50%) rotate(360deg);
-          transform: translate(-50%,-50%) rotate(360deg);
-      }
-    }
-  
-    .lds-rolling div, .lds-rolling div:after{
-      position: absolute;
-      height: 100px;
-      width: 100px;
-      border: 10px solid  #2f3542;
-      border-top-color: transparent;
-      border-radius: 50%;
-    }
-      
-    // body, button, input {
-    //   font: 1em Hind, sans-serif;
-    //   line-height: 1.5em;
-    // }
-    // body, input {
-    //   color: #171717;
-    // }
-
-
-    .app
-    {
+.app
+{
       height: 100%;
       margin: 0 auto;
       position: relative;
       justify-content: center;
       align-items: center;
       text-align: center;
-    }
+}
+    
 
 .btn-default{
   border-color:#ffffff
 }
-
-// .form-control
-// {
-//   border: none;
-// }
 
 .choices[data-type*=select-one] .choices__button {
   background-image: url('../img//search.png');
@@ -169,16 +64,6 @@ body
   margin: 0;
 }
 
-
-
-@media only screen and (max-width: 768px)
-{
-  .formio-form .choices__item.choices__item--selectable {
-      font-size: 14px;
-      opacity: 1;
-  }
-}
-
 .formio-form .choices__item.choices__item--selectable {
   white-space: nowrap;
   overflow: inherit!important;
@@ -189,10 +74,6 @@ body
   font-weight: 600;
   opacity: 1;
 }
-
-// .formio-component-Premium.Premium .input-group-prepend .input-group-text:before {
-//   content: url(rupee.cb2d217….svg);
-// }
 
 .formio-component-select.searchFormio .input-group-prepend .input-group-text:before {
   content: url('../img/pin.png');
@@ -223,20 +104,10 @@ body
     height: 40px;  
 }
 
-
-@media (min-width: 768px)
-{
-  .searchFormio{
-    width: calc(100% - 50%);
-  }
-}
-
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-
-body { font-family: sans-serif; }
 
 .gallery {
   background: #EEE;
@@ -279,17 +150,10 @@ body { font-family: sans-serif; }
 .carousel .c-item {
   display: inline-block;
   width: 35%;
-  @media (min-width: 768px)
-  {
-    width: 7%;
-  }
+
   background: #ffff;
   height: 100px;
 }
-
-
-
-
 
 .tab {
   overflow: hidden;
@@ -319,32 +183,32 @@ body { font-family: sans-serif; }
   border: 0px;
 }
 
-.search {
-  width: 100%;
-  border: 1px solid #494b4b;
-  position: relative;
-  display: flex;
-  border-radius: 4px;
-}
+// .search {
+//   width: 100%;
+//   border: 1px solid #494b4b;
+//   position: relative;
+//   display: flex;
+//   border-radius: 4px;
+// }
 
-.searchTerm {
-  width: 100%;
-  border: 0px;
-  padding: 5px;
-  height: auto;
-  outline: none;
-  border-right: 1px solid grey;
-}
+// .searchTerm {
+//   width: 100%;
+//   border: 0px;
+//   padding: 5px;
+//   height: auto;
+//   outline: none;
+//   border-right: 1px solid grey;
+// }
 
-.searchButton {
-  width: 40px;
-  height: 40px;
-  border: 0px;
-  text-align: center;
-  background-color: white;
-  font-size: 25px;
-  border-radius: 4px;
-}
+// .searchButton {
+//   width: 40px;
+//   height: 40px;
+//   border: 0px;
+//   text-align: center;
+//   background-color: white;
+//   font-size: 25px;
+//   border-radius: 4px;
+// }
 
 .wrap{
   width: 40%;
@@ -371,14 +235,7 @@ body { font-family: sans-serif; }
   border-radius: 10px;
   overflow: hidden;
 }
-@media (min-width: 768px)
-  {
-    .card {
-      width: calc(100% - 800px );
-      height: 600px;
-    }
-    
-  }
+
 /* hide limit values on X axis */
 .card #canvas {
   margin-left: -30px;
@@ -390,11 +247,6 @@ body { font-family: sans-serif; }
   height: 185px;
   padding: 20px;
   box-sizing: border-box;
-}
-@media(min-width:632px){
-  // .card .about{
-  //   height: 768px;
-  // }
 }
 
 .card .about h3,
@@ -517,14 +369,6 @@ body { font-family: sans-serif; }
   animation: bg 20s infinite;
 }
 
-// .boxes{
-//   padding: 50px;
-// }
-// .innerbox{
-//   background-color: #f5fbff;
-//   padding: 20px;
-// }
-
 .graph{
   display: flex;
   justify-content: center;
@@ -532,8 +376,62 @@ body { font-family: sans-serif; }
   // height: 70%
 }
 
-@media(max-width:768px){
-  .graph{
+// Mobile CSS Start
+
+@media (min-width: 768px)
+{
+    .card {
+      width: calc(100% - 800px );
+      height: 600px;
+    }
+
+    .searchFormio{
+      width: calc(100% - 50%);
+    }
+
+    .formio-form .choices__item.choices__item--selectable {
+      font-size: 14px;
+      opacity: 1;
+    }
+    
+    .graph{
       width: 100%;
-  }
+    }
+
+    .carousel .c-item
+    {
+      width: 7%;
+    }
 }
+// Mobile CSS End
+
+
+
+// Loader css start
+
+.loadersmall {
+  // border: 5px solid #f3f3f3;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+  border-top: 5px solid #555;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 44%;
+  left: 44%;
+  z-index: 1031;
+}
+
+.loaderWrapper{
+  background: white;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 1031;
+  left:0;
+  top:0;
+  bottom:0;
+}
+
+// Loader css end

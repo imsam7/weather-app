@@ -21,7 +21,6 @@ function WeatherHomeLayout({ forecastDetails }) {
         tempForecast.push(forecastDetails.list[i])
         currentTimestamp.push(timestampsMaster[timestampsMaster.length - i - 1])
     }
-    console.log(currentTimestamp)
     currentTimestamp.reverse()
     dailyForecast.push(tempForecast)
     tempForecast = []
@@ -41,7 +40,6 @@ function WeatherHomeLayout({ forecastDetails }) {
     const [carouselIndex, setCarouselIndex] = useState(0);
 
     function getWeatherDataDayWise(index) {
-        // setcurrentWeatherDetails(dailyForecast[index][0])
         setFiveDayWeatherForecast(dailyForecast[index])
         setCarouselIndex(index)
         if (index !== 0)
