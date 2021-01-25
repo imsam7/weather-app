@@ -8,7 +8,11 @@ import Loader from '../../shared/components/loader'
 import SearchBar from 'material-ui-search-bar';
 import { Form } from 'react-formio';
 import { form } from '../../assets/form'
+import { cities } from '../../assets/indianCities'
 import FormioUtils from 'formiojs/utils';
+import pin from '../../assets/img/pin.png'
+import search from '../../assets/img/search.png'
+
 
 class WeatherHomeContainer extends React.Component {
     constructor(props) {
@@ -17,8 +21,10 @@ class WeatherHomeContainer extends React.Component {
     }
 
     cityChange = (e) => {
+        // if (e !== undefined)
+        // console.log(e.target.value)
         if (e.data.select != "")
-            this.props.dispatch(loadWeather({ city: e.data.select }))
+        this.props.dispatch(loadWeather({ city: e.data.select }))
     }
 
     componentDidMount() {
@@ -35,6 +41,20 @@ class WeatherHomeContainer extends React.Component {
         return (
             <>
                 <center><Form form={form} className="myForm" onChange={this.cityChange} /></center>
+
+
+                {/* <div >
+                    <i className="pin-icon"></i>
+                    <input list="cityDropdown" name="cities" id="cities" onChange={this.cityChange} className="search-bar" autocomplete="on"/>
+                    <i className="search-icon"></i>
+                </div>
+
+                <datalist id="cityDropdown">
+                    {cities.map((cityList, index) => (
+                        <option value={cityList.city}></option>
+                    ))}
+                </datalist> */}
+
                 {this.props.weatherData.loading ? <Loader /> : <WeatherHomeLayout forecastDetails={this.props.weatherData.weather} />}
             </>
         )

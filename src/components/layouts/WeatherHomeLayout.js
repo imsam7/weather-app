@@ -38,6 +38,7 @@ function WeatherHomeLayout({ forecastDetails }) {
     const [fiveDayWeatherForecast, setFiveDayWeatherForecast] = useState(dailyForecast[0]);
     const [timestamps, setTimestamps] = useState(currentTimestamp);
     const [carouselIndex, setCarouselIndex] = useState(0);
+    const [showWeatherDetails, setShowWeatherDetails] = useState(false);
 
     function getWeatherDataDayWise(index) {
         setFiveDayWeatherForecast(dailyForecast[index])
@@ -103,6 +104,10 @@ function WeatherHomeLayout({ forecastDetails }) {
         return (result);
     }
 
+    function navigateCarousel() {
+        setShowWeatherDetails(!showWeatherDetails)
+    }
+
     return (
         <div className="">
             <div className="demo">
@@ -120,87 +125,98 @@ function WeatherHomeLayout({ forecastDetails }) {
                         </div>
                     ))}
                 </div>
+
+                {dailyForecast.map((weatherDetails, index) => (
+                    <span className={"dot " + (carouselIndex === index ? 'active-dot' : '')}></span>
+                ))}
+
             </div>
+            <br /><br />
 
             <div id="Mon1" className="tabcontent">
                 <div className="bodyOfdiv">
                     <center>
-                        <div className="card">
-                            <div className="about">
-                                {/* <h3><b>{forecastDetails.city.name}</b></h3> */}
-                                <div style={{ display: "flex", flexWrap: "wrap" }}>
+                        <div className="carousel">
+                            {!showWeatherDetails && <div className="tablinks card-item" >
+                                {/* style={{ display: "none" }} */}
+                                <div className="card" >
+                                    <div className="about">
+                                        <div className="alignleft">
+                                            <h3><b>{forecastDetails.city.name}</b> &nbsp;
+                                {kelvinToCelcius(fiveDayWeatherForecast[0].main.temp)}°C </h3>
+                                        </div>
+                                        <div className="alignright">
+                                            {fiveDayWeatherForecast[0].weather[0].main === 'Clear' && <img src={sun} style={{ height: "100px", width: "100px", }} />}
+                                            {fiveDayWeatherForecast[0].weather[0].main === 'Clouds' && <img src={cloudy} style={{ height: "100px", width: "100px" }} />}
+                                        </div>
+                                    </div>
 
-                                    <h1 style={{ fontSize: "50px", marginTop: "0px", marginBottom: "0px", marginRight: "15px" }} >
-                                        <b>{kelvinToCelcius(fiveDayWeatherForecast[0].main.temp)}°C</b></h1>
+                                    <div className="axis graph">
 
-                                    {fiveDayWeatherForecast[0].weather[0].main === 'Clear' && <img src={sun} style={{ height: "50px", width: "50px" }} />}
-                                    {fiveDayWeatherForecast[0].weather[0].main === 'Clouds' && <img src={cloudy} style={{ height: "50px", width: "50px" }} />}
-
+                                        <Line options={{
+                                            tooltips: { enabled: false, }, legend: { display: false }, scales:
+                                            {
+                                                yAxes: [{
+                                                    display: false,
+                                                    gridLines: {
+                                                        drawBorder: false,
+                                                        display: false
+                                                    },
+                                                    ticks: {
+                                                        beginAtZero: true,
+                                                        min: 0,
+                                                        max: 50
+                                                    }
+                                                }],
+                                                xAxes: [{ gridLines: { display: false, }, }],
+                                            }
+                                        }}
+                                            data={{
+                                                labels: fiveDayWeatherForecast.map((weatherDetails, index) => [kelvinToCelcius(weatherDetails.main.temp) + "°C", timestamps[index]]),
+                                                datasets: [{
+                                                    data: fiveDayWeatherForecast.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp)),
+                                                    label: 'Temp',
+                                                    borderColor: '#3498DB',
+                                                    fill: false
+                                                }]
+                                            }}
+                                        />
+                                    </div>
                                 </div>
                             </div>
+                            }
 
-                            <div className="axis graph">
-
-                                <Line options={{
-                                    tooltips: { enabled: false, }, legend: { display: false }, scales:
-                                    {
-                                        yAxes: [{
-                                            display: false,
-                                            gridLines: {
-                                                drawBorder: false,
-                                                display: false
-                                            },
-                                            ticks: {
-                                                beginAtZero: true,
-                                                min: 0,
-                                                max: 50
-                                            }
-                                        }],
-                                        xAxes: [{ gridLines: { display: false, }, }],
-                                    }
-                                }}
-                                    data={{
-                                        labels: fiveDayWeatherForecast.map((weatherDetails, index) => [kelvinToCelcius(weatherDetails.main.temp) + "°C", timestamps[index]]),
-                                        datasets: [{
-                                            data: fiveDayWeatherForecast.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp)),
-                                            label: 'Temp',
-                                            borderColor: '#3498DB',
-                                            fill: false
-                                        }]
-                                    }}
-                                />
-                            </div>
+                            {showWeatherDetails && <div className="tablinks card-item" >
+                                <div className="card">
+                                    <div className="about">
+                                    <div className="alignleft">
+                                        <p><b>Feels like</b>&nbsp;{kelvinToCelcius(fiveDayWeatherForecast[0].main.feels_like)} °C with {fiveDayWeatherForecast[0].weather[0].description}</p>
+                                        <p><b>Pressure</b>&nbsp;{fiveDayWeatherForecast[0].main.pressure} hpa</p>
+                                        <p><b>Humidity</b>&nbsp;{fiveDayWeatherForecast[0].main.humidity} %</p>
+                                        <p><b>Chance of rain</b>&nbsp;{fiveDayWeatherForecast[0].pop} %</p>
+                                        <p><b>Cloudiness</b>&nbsp;{fiveDayWeatherForecast[0].clouds.all} %</p>
+                                        <p><b>Wind Speed</b>&nbsp;{fiveDayWeatherForecast[0].wind.speed}m/s</p>
+                                        <p><b>Visibility</b>&nbsp;{fiveDayWeatherForecast[0].visibility} m</p>
+                                        {carouselIndex == 0 && <p><b>Sunrise</b>&nbsp;{sunriseTime}&nbsp; </p>}
+                                        {carouselIndex == 0 && <p><b>Sunset</b>&nbsp;{sunsetTime}</p>}
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>}
+                            <div className="right-arrow-icon carousel-control left" onClick={navigateCarousel}>NEXT</div>
+                            <div className="left-arrow-icon carousel-control right" onClick={navigateCarousel}>PREV</div>
                         </div>
                     </center>
                 </div>
                 <br />
-                <div style={{ display: "flex" }}>
-                    <div className="" style={{ width: "50%", flex: "1" }}>
-                        <div className="innerbox" style={{ height: "auto", paddingTop: "10px", marginRight: "8px" }}>
-                            <p><b>Pressure</b><br />{fiveDayWeatherForecast[0].main.pressure} hpa</p>
-                        </div>
-                    </div>
-                    <div className="" style={{ width: "50%", flex: "1" }}>
-                        <div className="innerbox" style={{ height: "auto", paddingTop: "10px", marginRight: "8px" }}>
-                            <p><b>Humidity</b><br />{fiveDayWeatherForecast[0].main.humidity} %</p>
-                        </div>
-                    </div>
-                </div>
-                <br />
-                <div style={{ display: "flex", marginTop: "-20px" }}>
-                    <div className="boxes" style={{ width: "50%", flex: "1" }}>
-                        <div className="innerbox" style={{ height: "auto", paddingTop: "0px", marginRight: "40px", marginBottom: "5px", backgroundColor: "white" }}>
-                            <p><b>Sunrise</b><br />{sunriseTime}</p>
-                        </div>
-                    </div>
-                    <div className="" style={{ width: " 50%", flex: "1", height: "auto" }}>
-                        <div className="innerbox" style={{ height: "auto", paddingTop: "0px", marginLeft: "40px", marginBottom: "5px", backgroundColor: "white" }}>
-                            <p><b>Sunset</b><br />{sunsetTime}</p>
-                        </div>
-                    </div>
-                </div>
+            </div>
+
+            <div>
+                <span className={"dot " + (!showWeatherDetails ? 'active-dot' : '')}></span>
+                <span className={"dot " + (showWeatherDetails ? 'active-dot' : '')}></span>
             </div>
         </div >
+
     )
 }
 

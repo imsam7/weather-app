@@ -36,7 +36,17 @@ body
       text-align: center;
 }
     
-
+.search-bar
+{
+  text-decoration: none;
+  width: 80%;
+  height: 35px;
+  // border: none;
+}
+input::-webkit-calendar-picker-indicator {
+  // display: none;
+  content: url('../img/search.png');
+}
 .btn-default{
   border-color:#ffffff
 }
@@ -64,16 +74,16 @@ body
   margin: 0;
 }
 
-.formio-form .choices__item.choices__item--selectable {
-  white-space: nowrap;
-  overflow: inherit!important;
-  padding-right: 25px;
-  text-overflow: ellipsis;
-  color: #000;
-  font-size: 16px;
-  font-weight: 600;
-  opacity: 1;
-}
+// .formio-form .choices__item.choices__item--selectable {
+//   white-space: nowrap;
+//   overflow: inherit!important;
+//   padding-right: 25px;
+//   text-overflow: ellipsis;
+//   color: #000;
+//   font-size: 16px;
+//   font-weight: 600;
+//   opacity: 1;
+// }
 
 .formio-component-select.searchFormio .input-group-prepend .input-group-text:before {
   content: url('../img/pin.png');
@@ -102,6 +112,8 @@ body
     transition: .4s;
     border-radius: 0;
     height: 40px;  
+    margin-top: 20px;
+    text-decoration: none;
 }
 
 * {
@@ -135,10 +147,59 @@ body
   color: white;
 }
 
-// Resources
+// Icons start
+
+.pin-icon
+{
+  content: url('../img/pin.png');
+  width: 4%;
+  height: 4%;
+}
+
+.search-icon{
+  content: url('../img/search.png');
+  width: 4%;
+  height: 4%;
+}
+
+.right-arrow-icon
+{
+  content: url('../img/right-arrow.png');
+  width: 8%;
+  height: 4%;
+}
+
+.left-arrow-icon
+{
+  content: url('../img/left-arrow.png');
+  width: 8%;
+  height: 4%;
+}
+//Icons end
 
 
 //Carousel CSS
+.carousel-control {
+  // margin-top: 350px;
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  left: 0;
+  // width: 15%;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  // text-shadow: 0 1px 2px rgb(0 0 0 / 60%);
+  background-color: rgba(0,0,0,0);
+  filter: alpha(opacity=50);
+  opacity: .5;
+}
+
+.left
+{
+  right: 0;
+  left: auto; 
+}
 .demo {overflow: visible; height: 100px;z-index: 3;}
 .carousel {
   // color: #FFF;
@@ -148,11 +209,31 @@ body
   position: initial;
 }
 .carousel .c-item {
+  padding: 18px 25px 18px 25px;
   display: inline-block;
-  width: 35%;
-
+  width: calc(100% / 3);
   background: #ffff;
-  height: 100px;
+  height: 100%;
+}
+.carousel .card-item {
+  margin-top: 5px;
+  padding: 18px 0px 18px 0px;
+  display: inline-block;
+  width: calc(100%);
+  background: #ffff;
+  height: 100%;
+}
+.dot {
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+  margin-top: 5px;
+  background-color: #bbb;
+  display: inline-block;
+}
+.active-dot
+{
+  background-color: #555;
 }
 
 .tab {
@@ -173,7 +254,7 @@ body
 }
 
 .active {
-    border: 1px solid #3498DB;
+    border: 3px solid #555;
     background-color: rgb(253, 252, 252);
 }
 
@@ -182,33 +263,6 @@ body
   padding: 6px 12px;
   border: 0px;
 }
-
-// .search {
-//   width: 100%;
-//   border: 1px solid #494b4b;
-//   position: relative;
-//   display: flex;
-//   border-radius: 4px;
-// }
-
-// .searchTerm {
-//   width: 100%;
-//   border: 0px;
-//   padding: 5px;
-//   height: auto;
-//   outline: none;
-//   border-right: 1px solid grey;
-// }
-
-// .searchButton {
-//   width: 40px;
-//   height: 40px;
-//   border: 0px;
-//   text-align: center;
-//   background-color: white;
-//   font-size: 25px;
-//   border-radius: 4px;
-// }
 
 .wrap{
   width: 40%;
@@ -231,7 +285,7 @@ body
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.1); 
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 350px;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -362,7 +416,6 @@ body
   opacity: 0.4;
 }
 
-/* Animated background, credits: Manuel Pinto, https://codepen.io/P1N2O/pen/pyBNzX */
 .card {
   background: linear-gradient(-45deg,white,rgb(247, 245, 245), white,rgb(251, 255, 255));
   background-size: 400% 400%;
@@ -376,7 +429,12 @@ body
   // height: 70%
 }
 
-// Mobile CSS Start
+// canvas
+// {
+//   height: 182px;
+// }
+
+// Desktop CSS Start
 
 @media (min-width: 768px)
 {
@@ -386,7 +444,7 @@ body
     }
 
     .searchFormio{
-      width: calc(100% - 50%);
+      width: calc(100% - 60%);
     }
 
     .formio-form .choices__item.choices__item--selectable {
@@ -402,9 +460,41 @@ body
     {
       width: 7%;
     }
-}
-// Mobile CSS End
 
+    .loadersmall {
+      top: 40% !important;
+      left: 50% !important;
+    }
+
+    .dot{
+      display: none;
+    }
+
+    .right-arrow-icon
+    {
+      width: 2%;
+    }
+
+    .left-arrow-icon
+    {
+      width: 2%;
+    }
+    // canvas
+    // {
+    //   height: 161px !important;
+    // }
+    
+}
+// Desktop CSS End
+
+
+.alignleft {
+  float: left;
+  text-align: left;
+}
+.alignright {
+	float: right;
+}
 
 
 // Loader css start
