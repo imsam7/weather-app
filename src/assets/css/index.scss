@@ -2,7 +2,8 @@ body
 {
   min-height: 100vh;
   margin: 0 15px;
-  
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+
   // color: #ffffff;
   position: relative;
   font-family: 'Montserrat', sans-serif;
@@ -35,7 +36,36 @@ body
       align-items: center;
       text-align: center;
 }
-    
+
+// Loader css start
+
+.loadersmall {
+  // border: 5px solid #f3f3f3;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+  border-top: 5px solid #555;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 44%;
+  left: 44%;
+  z-index: 1031;
+}
+
+.loaderWrapper{
+  background: white;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 1031;
+  left:0;
+  top:0;
+  bottom:0;
+}
+
+// Loader css end
+
 .search-bar
 {
   text-decoration: none;
@@ -175,6 +205,15 @@ input::-webkit-calendar-picker-indicator {
   width: 8%;
   height: 4%;
 }
+
+.sun-icon
+{
+  content: url('../img/sun.png');
+  height: 90px;
+  width: 90px;
+  -webkit-animation: spin 5s linear infinite;
+  animation: spin 5s linear infinite;
+}
 //Icons end
 
 
@@ -201,7 +240,12 @@ input::-webkit-calendar-picker-indicator {
   left: auto; 
 }
 .demo {overflow: visible; height: 100px;z-index: 3;}
+.carousel::-webkit-scrollbar {
+  display: none;
+}
 .carousel {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
   // color: #FFF;
   white-space: nowrap;
   overflow-x: auto;
@@ -209,15 +253,16 @@ input::-webkit-calendar-picker-indicator {
   position: initial;
 }
 .carousel .c-item {
-  padding: 18px 25px 18px 25px;
+  padding: 5px;
   display: inline-block;
   width: calc(100% / 3);
   background: #ffff;
   height: 100%;
+  cursor: pointer;
 }
-.carousel .card-item {
+ .card-item {
   margin-top: 5px;
-  padding: 18px 0px 18px 0px;
+  padding: 5px;
   display: inline-block;
   width: calc(100%);
   background: #ffff;
@@ -277,15 +322,15 @@ input::-webkit-calendar-picker-indicator {
   background-color: white;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   box-sizing: border-box;
-
+  text-align: center;
 }
 
 .card {
-  background: linear-gradient(-45deg, #e5e5f1, #c3e6fa);
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1); 
+  // background: linear-gradient(-45deg, #e5e5f1, #c3e6fa);
+  // box-shadow: 0 0 6px rgba(0, 0, 0, 0.1); 
   position: relative;
   width: 100%;
-  height: 350px;
+  height: 100%;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -417,9 +462,14 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .card {
-  background: linear-gradient(-45deg,white,rgb(247, 245, 245), white,rgb(251, 255, 255));
+  // background: linear-gradient(-45deg,white,rgb(247, 245, 245), white,rgb(251, 255, 255));
   background-size: 400% 400%;
   animation: bg 20s infinite;
+}
+
+.formio-form
+{
+  min-height: 50px;
 }
 
 .graph{
@@ -429,10 +479,35 @@ input::-webkit-calendar-picker-indicator {
   // height: 70%
 }
 
+.central
+{
+  width: 100%;
+}
 // canvas
 // {
 //   height: 182px;
 // }
+
+.heading
+{
+  color: grey;
+  font-size: 12px;
+}
+
+.text
+{
+  font-size: 12px;
+}
+
+.alignleft {
+  float: left;
+  text-align: left;
+}
+
+.alignright {
+  float: right;
+    text-align: right;
+}
 
 // Desktop CSS Start
 
@@ -440,7 +515,7 @@ input::-webkit-calendar-picker-indicator {
 {
     .card {
       width: calc(100% - 800px );
-      height: 600px;
+      height: 100%;
     }
 
     .searchFormio{
@@ -459,6 +534,8 @@ input::-webkit-calendar-picker-indicator {
     .carousel .c-item
     {
       width: 7%;
+      cursor: pointer;
+
     }
 
     .loadersmall {
@@ -479,49 +556,36 @@ input::-webkit-calendar-picker-indicator {
     {
       width: 2%;
     }
-    // canvas
-    // {
-    //   height: 161px !important;
+
+    .bodyOfdiv{
+      width: 100%;
+    }
+
+    // .alignleft {
+    //   float: none !important;
+    //   text-align: unset !important;
     // }
-    
+
+    // .alignright {
+    //   float: none !important;
+    //   text-align: unset !important;
+    // }
+
+    .heading
+    {
+      font-size: 15px !important;
+    }
+
+    .text
+    {
+      font-size: 15px !important;
+    }
+
+    .central
+    {
+      width: calc(100% - 60%);
+    }
+
 }
 // Desktop CSS End
 
-
-.alignleft {
-  float: left;
-  text-align: left;
-}
-.alignright {
-	float: right;
-}
-
-
-// Loader css start
-
-.loadersmall {
-  // border: 5px solid #f3f3f3;
-  -webkit-animation: spin 1s linear infinite;
-  animation: spin 1s linear infinite;
-  border-top: 5px solid #555;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  top: 44%;
-  left: 44%;
-  z-index: 1031;
-}
-
-.loaderWrapper{
-  background: white;
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  z-index: 1031;
-  left:0;
-  top:0;
-  bottom:0;
-}
-
-// Loader css end

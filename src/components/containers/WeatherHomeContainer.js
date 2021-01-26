@@ -24,10 +24,24 @@ class WeatherHomeContainer extends React.Component {
         // if (e !== undefined)
         // console.log(e.target.value)
         if (e.data.select != "")
-        this.props.dispatch(loadWeather({ city: e.data.select }))
+            this.props.dispatch(loadWeather({ city: e.data.select }))
     }
 
     componentDidMount() {
+        fetch("https://wft-geo-db.p.rapidapi.com/v1/geo/cities", {
+            "method": "GET",
+            "headers": {
+                'Content-Type': "application/json",
+                "x-rapidapi-key": "53c0dc0908mshb4c43628b89d679p1f19a0jsnc19c261b1858",
+                "x-rapidapi-host": "wft-geo-db.p.rapidapi.com"
+            }
+        })
+            .then(response => {
+                console.log(response);
+            })
+            .catch(err => {
+                console.error(err);
+            });
         this.props.dispatch(loadUserCity())
     }
 
