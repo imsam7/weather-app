@@ -8,16 +8,15 @@ function WeatherHomeLayout({ forecastDetails }) {
     var tempForecast = []
     var currentTimestamp = []
     var today = new Date();
-    var timestampsMaster = ["3 am", "6 am", "9 am", "12 pm", "3 pm", "6 pm", "9 pm", "12 am"]
+    var timestampsMaster = ["3am", "6am", "9am", "12pm", "3pm", "6pm", "9pm", "12am"]
     var upcomingDays = getUpcomingDays()
     let sunriseTime = epochtoDate(forecastDetails.city.sunrise)
     let sunsetTime = epochtoDate(forecastDetails.city.sunset)
-    var hour = Math.ceil((24 - today.getHours()) / 3)
+    // var dateHour = Math.round((today.getHours()) / 3)
+    var currentHour = forecastDetails.list[0].dt_txt.split(" ")[1].split(":")[0]
+    var hour = Math.ceil((24 - currentHour) / 3)
 
-    if (hour === 0)
-        hour++
-
-    for (var i = 0; i < hour; i++) {
+    for (var i = 0; i <= hour; i++) {
         tempForecast.push(forecastDetails.list[i])
         currentTimestamp.push(timestampsMaster[timestampsMaster.length - i - 1])
     }
@@ -26,7 +25,7 @@ function WeatherHomeLayout({ forecastDetails }) {
     tempForecast = []
 
     var j = 0;
-    for (var i = hour; i < forecastDetails.list.length; i++) {
+    for (var i = hour + 1; i < forecastDetails.list.length; i++) {
         j++
         tempForecast.push(forecastDetails.list[i])
         if (j % 8 === 0) {
@@ -109,7 +108,7 @@ function WeatherHomeLayout({ forecastDetails }) {
 
     return (
         <center>
-            
+
             <div className="">
                 <h2><b>{forecastDetails.city.name} {kelvinToCelcius(selectedWeatherForecast[0].main.temp)}°C</b> </h2>
             </div>
@@ -157,7 +156,7 @@ function WeatherHomeLayout({ forecastDetails }) {
                                 }
                             }}
                                 data={{
-                                    labels: selectedWeatherForecast.map((weatherDetails, index) => [kelvinToCelcius(weatherDetails.main.temp) + "°C", timestamps[index]]),
+                                    labels: selectedWeatherForecast.map((weatherDetails, index) => [kelvinToCelcius(weatherDetails.main.temp) + "°", timestamps[index]]),
                                     datasets: [{
                                         data: selectedWeatherForecast.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp)),
                                         label: 'Temp',

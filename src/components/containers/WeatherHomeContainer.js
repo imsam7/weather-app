@@ -50,12 +50,11 @@ class WeatherHomeContainer extends React.Component {
                                 options={cities}
                                 // defaultValue={this.props.userCityData.userCityDetails.city}
                                 fullWidth={true}
-                                native={true}
                                 disableListWrap
                                 disableClearable
                                 getOptionLabel={(option) => option.city + ", " + option.admin_name}
                                 // style={{ width: 300 }}
-                                renderInput={(params) => <TextField {...params} label="Search City" IconComponent={search} variant="outlined"/>}
+                                renderInput={(params) => <TextField {...params} label="Search City" variant="outlined"/>}
                             />
                         </div>
                         <br />
