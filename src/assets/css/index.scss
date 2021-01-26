@@ -1,19 +1,13 @@
-body
-{
+body {
   min-height: 100vh;
   margin: 0 15px;
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-
-  // color: #ffffff;
-  position: relative;
-  font-family: 'Montserrat', sans-serif;
-  @media (min-width: 768px)
-  {
+  // position: relative;
+  font-family: "Montserrat", sans-serif;
+  @media (min-width: 768px) {
     margin: 0 15px;
   }
 
-  &:before
-  {
+  &:before {
     content: "";
     position: fixed;
     top: 0;
@@ -27,14 +21,13 @@ body
   }
 }
 
-.app
-{
-      height: 100%;
-      margin: 0 auto;
-      position: relative;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+.app {
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 // Loader css start
@@ -53,36 +46,36 @@ body
   z-index: 1031;
 }
 
-.loaderWrapper{
+.loaderWrapper {
   background: white;
   position: fixed;
   height: 100%;
   width: 100%;
   z-index: 1031;
-  left:0;
-  top:0;
-  bottom:0;
+  left: 0;
+  top: 0;
+  bottom: 0;
 }
 
 // Loader css end
 
-.search-bar
-{
-  text-decoration: none;
-  width: 80%;
-  height: 35px;
-  // border: none;
-}
+// .search-bar
+// {
+//   text-decoration: none;
+//   width: 80%;
+//   height: 35px;
+//   // border: none;
+// }
 input::-webkit-calendar-picker-indicator {
   // display: none;
-  content: url('../img/search.png');
+  content: url("../img/search.png");
 }
-.btn-default{
-  border-color:#ffffff
+.btn-default {
+  border-color: #ffffff;
 }
 
-.choices[data-type*=select-one] .choices__button {
-  background-image: url('../img//search.png');
+.choices[data-type*="select-one"] .choices__button {
+  background-image: url("../img//search.png");
   padding: 0;
   background-size: 18px;
   position: absolute;
@@ -93,11 +86,10 @@ input::-webkit-calendar-picker-indicator {
   height: 20px;
   width: 20px;
   border-radius: 10em;
-  opacity: .5;
+  opacity: 0.5;
 }
 
-.formio-component-select .choices[data-type=select-one]:after
-{
+.formio-component-select .choices[data-type="select-one"]:after {
   // content: url('../img/pin.png');
   top: 20%;
   border: none;
@@ -116,7 +108,7 @@ input::-webkit-calendar-picker-indicator {
 // }
 
 .formio-component-select.searchFormio .input-group-prepend .input-group-text:before {
-  content: url('../img/pin.png');
+  content: url("../img/pin.png");
 }
 
 .formio-form .choices__item.choices__item--selectable {
@@ -130,20 +122,27 @@ input::-webkit-calendar-picker-indicator {
   opacity: 1;
 }
 
-.searchFormio{
-    padding: 7px 0;
-    font-size: 16px;
-    display: block;
-    width: 100%;
-    background-color: initial;
-    border: 1px solid #e5e8eb;
-    font-weight: 600;
-    color: #27313d;
-    transition: .4s;
-    border-radius: 0;
-    height: 40px;  
-    margin-top: 20px;
-    text-decoration: none;
+.search {
+  padding: 7px 0;
+  font-size: 16px;
+  display: block;
+  width: 100%;
+  margin-bottom: 5px;
+  // background-color: initial;
+  border: none;
+  font-weight: 600;
+  color: #27313d;
+  transition: 0.4s;
+  border-radius: 0;
+  height: 30px;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  margin: auto;
 }
 
 * {
@@ -152,19 +151,19 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .gallery {
-  background: #EEE;
+  background: #eee;
 }
 
 .gallery-cell {
   width: 28%;
   height: 200px;
   margin-right: 10px;
-  background: #8C8;
+  background: #8c8;
   counter-increment: gallery-cell;
 }
 
 .gallery-cell.is-selected {
-  background: #ED2;
+  background: #ed2;
 }
 
 /* cell number */
@@ -179,43 +178,38 @@ input::-webkit-calendar-picker-indicator {
 
 // Icons start
 
-.pin-icon
-{
-  content: url('../img/pin.png');
+.pin-icon {
+  content: url("../img/pin.png");
   width: 4%;
   height: 4%;
 }
 
-.search-icon{
-  content: url('../img/search.png');
+.search-icon {
+  content: url("../img/search.png");
   width: 4%;
   height: 4%;
 }
 
-.right-arrow-icon
-{
-  content: url('../img/right-arrow.png');
+.right-arrow-icon {
+  content: url("../img/right-arrow.png");
   width: 8%;
   height: 4%;
 }
 
-.left-arrow-icon
-{
-  content: url('../img/left-arrow.png');
+.left-arrow-icon {
+  content: url("../img/left-arrow.png");
   width: 8%;
   height: 4%;
 }
 
-.sun-icon
-{
-  content: url('../img/sun.png');
+.sun-icon {
+  content: url("../img/sun.png");
   height: 90px;
   width: 90px;
   -webkit-animation: spin 5s linear infinite;
   animation: spin 5s linear infinite;
 }
 //Icons end
-
 
 //Carousel CSS
 .carousel-control {
@@ -229,23 +223,27 @@ input::-webkit-calendar-picker-indicator {
   color: #fff;
   text-align: center;
   // text-shadow: 0 1px 2px rgb(0 0 0 / 60%);
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   filter: alpha(opacity=50);
-  opacity: .5;
+  opacity: 0.5;
 }
 
-.left
-{
+.left {
   right: 0;
-  left: auto; 
+  left: auto;
 }
-.demo {overflow: visible; height: 100px;z-index: 3;}
+.demo {
+  overflow: visible;
+  height: 100px;
+  z-index: 3;
+}
+
 .carousel::-webkit-scrollbar {
   display: none;
 }
 .carousel {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
   // color: #FFF;
   white-space: nowrap;
   overflow-x: auto;
@@ -260,7 +258,7 @@ input::-webkit-calendar-picker-indicator {
   height: 100%;
   cursor: pointer;
 }
- .card-item {
+.card-item {
   margin-top: 5px;
   padding: 5px;
   display: inline-block;
@@ -276,15 +274,13 @@ input::-webkit-calendar-picker-indicator {
   background-color: #bbb;
   display: inline-block;
 }
-.active-dot
-{
+.active-dot {
   background-color: #555;
 }
 
 .tab {
   overflow: hidden;
   background-color: white;
-
 }
 
 .tab button {
@@ -299,8 +295,8 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .active {
-    border: 3px solid #555;
-    background-color: rgb(253, 252, 252);
+  border: 3px solid #555;
+  background-color: rgb(253, 252, 252);
 }
 
 .tabcontent {
@@ -309,25 +305,25 @@ input::-webkit-calendar-picker-indicator {
   border: 0px;
 }
 
-.wrap{
+.wrap {
   width: 40%;
 }
 
-.innerbox{
+.innerbox {
   background-color: #f5fbff;
   padding: 20px;
 }
 
 .bodyOfdiv {
   background-color: white;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Helvetica Neue", Arial, sans-serif;
   box-sizing: border-box;
   text-align: center;
 }
 
 .card {
   // background: linear-gradient(-45deg, #e5e5f1, #c3e6fa);
-  // box-shadow: 0 0 6px rgba(0, 0, 0, 0.1); 
+  // box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
   position: relative;
   width: 100%;
   height: 100%;
@@ -339,7 +335,7 @@ input::-webkit-calendar-picker-indicator {
 .card #canvas {
   margin-left: -30px;
   margin-right: -30px;
-  width: 360px!important;
+  width: 360px !important;
 }
 
 .card .about {
@@ -371,7 +367,7 @@ input::-webkit-calendar-picker-indicator {
 
 .card .info p {
   font-size: 11px;
-  color:black;
+  color: black;
   font-weight: 300;
 }
 
@@ -399,7 +395,7 @@ input::-webkit-calendar-picker-indicator {
 
 .axis {
   // position: absolute;
-  color:#494b4b;
+  color: #494b4b;
   z-index: 1;
   text-transform: uppercase;
   display: flex;
@@ -435,7 +431,7 @@ input::-webkit-calendar-picker-indicator {
   position: absolute;
   top: 20px;
   left: 0;
-  color:black;
+  color: black;
   border-radius: 2px;
   width: 100%;
   line-height: 20px;
@@ -448,7 +444,7 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .value.value--this {
-  color:black;
+  color: black;
   font-weight: bold;
 }
 
@@ -467,20 +463,18 @@ input::-webkit-calendar-picker-indicator {
   animation: bg 20s infinite;
 }
 
-.formio-form
-{
+.formio-form {
   min-height: 50px;
 }
 
-.graph{
+.graph {
   display: flex;
   justify-content: center;
   width: 100%;
   // height: 70%
 }
 
-.central
-{
+.central {
   width: 100%;
 }
 // canvas
@@ -488,14 +482,12 @@ input::-webkit-calendar-picker-indicator {
 //   height: 182px;
 // }
 
-.heading
-{
+.heading {
   color: grey;
   font-size: 12px;
 }
 
-.text
-{
+.text {
   font-size: 12px;
 }
 
@@ -506,86 +498,99 @@ input::-webkit-calendar-picker-indicator {
 
 .alignright {
   float: right;
-    text-align: right;
+  text-align: right;
 }
+
+//Material UI CSS Start
+
+.MuiOutlinedInput-root {
+  border-radius: 20px !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #555 !important;
+}
+
+.MuiInputLabel-outlined.Mui-focused {
+  color: #555 !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input {
+  color: #555 !important;
+}
+
+.material-ui-textfield{
+  width: 100% !important;
+}
+// .MuiInputBase-fullWidth {
+//   width: 100% !important;
+// }
+// Materiual UI CSS End
 
 // Desktop CSS Start
 
-@media (min-width: 768px)
-{
-    .card {
-      width: calc(100% - 800px );
-      height: 100%;
-    }
+@media (min-width: 768px) {
+  .card {
+    width: calc(100% - 800px);
+    height: 100%;
+  }
 
-    .searchFormio{
-      width: calc(100% - 60%);
-    }
+  .searchFormio {
+    width: calc(100% - 60%);
+  }
+  
+  .search {
+    width: calc(100% - 60%);
+  }
+  .formio-form .choices__item.choices__item--selectable {
+    font-size: 14px;
+    opacity: 1;
+  }
 
-    .formio-form .choices__item.choices__item--selectable {
-      font-size: 14px;
-      opacity: 1;
-    }
-    
-    .graph{
-      width: 100%;
-    }
+  .graph {
+    width: 100%;
+  }
 
-    .carousel .c-item
-    {
-      width: 7%;
-      cursor: pointer;
+  .carousel .c-item {
+    width: 7%;
+    cursor: pointer;
+  }
 
-    }
+  .loadersmall {
+    top: 40% !important;
+    left: 50% !important;
+  }
 
-    .loadersmall {
-      top: 40% !important;
-      left: 50% !important;
-    }
+  .dot {
+    display: none;
+  }
 
-    .dot{
-      display: none;
-    }
+  .right-arrow-icon {
+    width: 2%;
+  }
 
-    .right-arrow-icon
-    {
-      width: 2%;
-    }
+  .left-arrow-icon {
+    width: 2%;
+  }
 
-    .left-arrow-icon
-    {
-      width: 2%;
-    }
+  .bodyOfdiv {
+    width: 100%;
+  }
 
-    .bodyOfdiv{
-      width: 100%;
-    }
+  .heading {
+    font-size: 15px !important;
+  }
 
-    // .alignleft {
-    //   float: none !important;
-    //   text-align: unset !important;
-    // }
+  .text {
+    font-size: 15px !important;
+  }
 
-    // .alignright {
-    //   float: none !important;
-    //   text-align: unset !important;
-    // }
+  .central {
+    width: calc(100% - 60%);
+  }
 
-    .heading
-    {
-      font-size: 15px !important;
-    }
-
-    .text
-    {
-      font-size: 15px !important;
-    }
-
-    .central
-    {
-      width: calc(100% - 60%);
-    }
-
+  .material-ui-textfield{
+    width: 40% !important;
+  }
 }
 // Desktop CSS End
-

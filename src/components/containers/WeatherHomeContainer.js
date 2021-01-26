@@ -12,6 +12,8 @@ import { cities } from '../../assets/indianCities'
 import FormioUtils from 'formiojs/utils';
 import pin from '../../assets/img/pin.png'
 import search from '../../assets/img/search.png'
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 
 class WeatherHomeContainer extends React.Component {
@@ -20,11 +22,9 @@ class WeatherHomeContainer extends React.Component {
         this.cityChange = this.cityChange.bind(this);
     }
 
-    cityChange = (e) => {
-        // if (e !== undefined)
-        // console.log(e.target.value)
-        if (e.data.select != "")
-            this.props.dispatch(loadWeather({ city: e.data.select }))
+    cityChange = (e, data) => {
+        if (data.city)
+            this.props.dispatch(loadWeather({ city: data.city }))
     }
 
     componentDidMount() {
@@ -40,22 +40,27 @@ class WeatherHomeContainer extends React.Component {
     render() {
         return (
             <>
-                <center><Form form={form} className="myForm" onChange={this.cityChange} /></center>
-
-
-                {/* <div >
-                    <i className="pin-icon"></i>
-                    <input list="cityDropdown" name="cities" id="cities" onChange={this.cityChange} className="search-bar" autocomplete="on"/>
-                    <i className="search-icon"></i>
-                </div>
-
-                <datalist id="cityDropdown">
-                    {cities.map((cityList, index) => (
-                        <option value={cityList.city}></option>
-                    ))}
-                </datalist> */}
-
-                {this.props.weatherData.loading ? <Loader /> : <WeatherHomeLayout forecastDetails={this.props.weatherData.weather} />}
+                {/* <Form form={form} className="myForm" onChange={this.cityChange} /> */}
+                {this.props.weatherData.loading ? <Loader /> :
+                    <div>
+                        <div className="search center">
+                            <Autocomplete
+                                onChange={this.cityChange}
+                                id="combo-box-demo"
+                                options={cities}
+                                // defaultValue={this.props.userCityData.userCityDetails.city}
+                                fullWidth={true}
+                                native={true}
+                                disableListWrap
+                                disableClearable
+                                getOptionLabel={(option) => option.city + ", " + option.admin_name}
+                                // style={{ width: 300 }}
+                                renderInput={(params) => <TextField {...params} label="Search City" IconComponent={search} variant="outlined"/>}
+                            />
+                        </div>
+                        <br />
+                        <WeatherHomeLayout forecastDetails={this.props.weatherData.weather} />
+                    </div>}
             </>
         )
     }
