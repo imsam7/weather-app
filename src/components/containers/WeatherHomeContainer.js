@@ -12,9 +12,11 @@ import { cities } from '../../assets/indianCities'
 import FormioUtils from 'formiojs/utils';
 import pin from '../../assets/img/pin.png'
 import search from '../../assets/img/search.png'
-import TextField from '@material-ui/core/TextField';
+import { TextField, InputAdornment } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
+import SearchIcon from '@material-ui/icons/Search';
+import RoomIcon from '@material-ui/icons/Room';
+import IconButton from "@material-ui/core/IconButton";
 
 class WeatherHomeContainer extends React.Component {
     constructor(props) {
@@ -23,8 +25,8 @@ class WeatherHomeContainer extends React.Component {
     }
 
     cityChange = (e, data) => {
-        if (data.city)
-            this.props.dispatch(loadWeather({ city: data.city }))
+        if (data.name)
+            this.props.dispatch(loadWeather({ city: data.name }))
     }
 
     componentDidMount() {
@@ -47,14 +49,30 @@ class WeatherHomeContainer extends React.Component {
                             <Autocomplete
                                 onChange={this.cityChange}
                                 id="combo-box-demo"
-                                options={cities}
+                                options={cities.sort((a, b) => (a.name > b.name) ? 1 : -1)}
                                 // defaultValue={this.props.userCityData.userCityDetails.city}
                                 fullWidth={true}
                                 disableListWrap
                                 disableClearable
-                                getOptionLabel={(option) => option.city + ", " + option.admin_name}
+                                forcePopupIcon={false}
+                                getOptionLabel={(option) => option.name + ", " + option.subcountry}
                                 // style={{ width: 300 }}
-                                renderInput={(params) => <TextField {...params} label="Search City" variant="outlined"/>}
+                                renderInput={(params) =>
+                                    <TextField {...params} placeholder="Search City" variant="outlined"
+                                    InputProps={{
+                                        ...params.InputProps,
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <RoomIcon />
+                                            </InputAdornment>
+                                        ),
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                <SearchIcon />
+                                            </InputAdornment>
+                                        )
+                                    }}
+                                    />}
                             />
                         </div>
                         <br />

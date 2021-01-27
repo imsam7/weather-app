@@ -1,15 +1,11 @@
 body {
   min-height: 100vh;
   margin: 0 15px;
-  // position: relative;
   font-family: "Montserrat", sans-serif;
-  @media (min-width: 768px) {
-    margin: 0 15px;
-  }
-
+  // background-color: blue;
   &:before {
     content: "";
-    position: fixed;
+    // position: fixed;
     top: 0;
     left: 0;
     height: 100%;
@@ -20,7 +16,6 @@ body {
     background-size: cover;
   }
 }
-
 
 * {
   -webkit-box-sizing: border-box;
@@ -65,16 +60,12 @@ body {
 
 // Loader css end
 
-.btn-default {
-  border-color: #ffffff;
-}
-
 .search {
-  padding: 7px 0;
+  padding: 2px;
   font-size: 16px;
   display: block;
   width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 10px !important;
   // background-color: initial;
   border: none;
   font-weight: 600;
@@ -82,8 +73,12 @@ body {
   transition: 0.4s;
   border-radius: 0;
   height: 30px;
-  margin-top: 20px;
+  margin-top: 10px !important;
   text-decoration: none;
+}
+
+.btn-default {
+  border-color: #ffffff;
 }
 
 .center {
@@ -91,41 +86,6 @@ body {
   justify-content: center;
   margin: auto;
 }
-
-// Icons start
-
-.pin-icon {
-  content: url("../img/pin.png");
-  width: 4%;
-  height: 4%;
-}
-
-.search-icon {
-  content: url("../img/search.png");
-  width: 4%;
-  height: 4%;
-}
-
-.right-arrow-icon {
-  content: url("../img/right-arrow.png");
-  width: 8%;
-  height: 4%;
-}
-
-.left-arrow-icon {
-  content: url("../img/left-arrow.png");
-  width: 8%;
-  height: 4%;
-}
-
-.sun-icon {
-  content: url("../img/sun.png");
-  height: 90px;
-  width: 90px;
-  -webkit-animation: spin 5s linear infinite;
-  animation: spin 5s linear infinite;
-}
-//Icons end
 
 //Carousel CSS
 .carousel-control {
@@ -170,7 +130,7 @@ body {
 }
 
 .carousel .c-item {
-  padding: 5px;
+  padding: 10px;
   display: inline-block;
   width: calc(100% / 3);
   background: #ffff;
@@ -243,9 +203,19 @@ body {
   text-align: center;
 }
 
+.shadowBox {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.1);
+  width: calc(100%);
+}
+
 .card {
   // background: linear-gradient(-45deg, #e5e5f1, #c3e6fa);
   // box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  // padding: 2px;
   position: relative;
   width: 100%;
   height: 100%;
@@ -416,25 +386,39 @@ body {
 }
 
 //Material UI CSS Start
+.MuiInputBase-input {
+  color: black !important;
+  font-size: medium !important;
+  font-style: italic !important;
+}
 
 .MuiOutlinedInput-root {
+  box-shadow: 0px 5px 10px 4px rgba(0, 0, 0, 0.1);
   border-radius: 20px !important;
+}
+.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: white !important;
 }
 
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: #555 !important;
+  border-bottom: #555;
+  // border-color: white !important;
 }
 
 .MuiInputLabel-outlined.Mui-focused {
-  color: #555 !important;
+  border-bottom: #555;
+  // border-color: white !important;
 }
 
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input {
-  color: #555 !important;
+  border-bottom: #555;
+  // border-color: white !important;}
 }
 
-.material-ui-textfield{
-  width: 100% !important;
+.material-ui-textfield {
+  border-bottom: #555;
+  // border-color: white !important;
+  // width: 100% !important;
 }
 
 // Materiual UI CSS End
@@ -450,10 +434,15 @@ body {
   .searchFormio {
     width: calc(100% - 60%);
   }
-  
+
+  .shadowBox {
+    box-shadow: none;
+  }
+
   .search {
     width: calc(100% - 60%);
   }
+
   .formio-form .choices__item.choices__item--selectable {
     font-size: 14px;
     opacity: 1;
@@ -501,8 +490,74 @@ body {
     width: calc(100% - 60%);
   }
 
-  .material-ui-textfield{
+  .material-ui-textfield {
     width: 40% !important;
   }
 }
 // Desktop CSS End
+
+// Icons start
+
+.pin-icon {
+  content: url("../img/pin.png");
+  width: 4%;
+  height: 4%;
+}
+
+.search-icon {
+  content: url("../img/search.png");
+  width: 4%;
+  height: 4%;
+}
+
+.right-arrow-icon {
+  content: url("../img/right-arrow.png");
+  width: 8%;
+  height: 4%;
+}
+
+.left-arrow-icon {
+  content: url("../img/left-arrow.png");
+  width: 8%;
+  height: 4%;
+}
+
+.sun-icon {
+  content: url("../img/sun.png");
+  height: 90px;
+  width: 90px;
+  -webkit-animation: spin 5s linear infinite;
+  animation: spin 5s linear infinite;
+}
+
+.cloud-icon {
+  content: url("../img/cloudy.png");
+  height: 90px;
+  width: 90px;
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+//Icons end

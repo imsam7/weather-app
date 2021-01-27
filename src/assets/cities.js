@@ -1,4 +1,4 @@
-[
+export const cities =[
     {
         "country": "Andorra",
         "geonameid": 3040051,

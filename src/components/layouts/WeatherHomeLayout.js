@@ -8,24 +8,32 @@ function WeatherHomeLayout({ forecastDetails }) {
     var tempForecast = []
     var currentTimestamp = []
     var today = new Date();
-    var timestampsMaster = ["3am", "6am", "9am", "12pm", "3pm", "6pm", "9pm", "12am"]
+    var timestampsMaster = ["12am", "3am", "6am", "9am", "12pm", "3pm", "6pm", "9pm"]
     var upcomingDays = getUpcomingDays()
     let sunriseTime = epochtoDate(forecastDetails.city.sunrise)
     let sunsetTime = epochtoDate(forecastDetails.city.sunset)
-    // var dateHour = Math.round((today.getHours()) / 3)
-    var currentHour = forecastDetails.list[0].dt_txt.split(" ")[1].split(":")[0]
-    var hour = Math.ceil((24 - currentHour) / 3)
 
-    for (var i = 0; i <= hour; i++) {
-        tempForecast.push(forecastDetails.list[i])
-        currentTimestamp.push(timestampsMaster[timestampsMaster.length - i - 1])
-    }
-    currentTimestamp.reverse()
-    dailyForecast.push(tempForecast)
-    tempForecast = []
-
+    var k = 0;
     var j = 0;
-    for (var i = hour + 1; i < forecastDetails.list.length; i++) {
+    var timeStampIndex = 0;
+    //Current day Forecast Details
+    for (var i = 0; i < forecastDetails.list.length; i++) {
+        if (forecastDetails.list[i].dt_txt.split(" ")[0].split("-")[2] == today.getDate()) {
+            tempForecast.push(forecastDetails.list[i])
+            currentTimestamp.push(timestampsMaster[timestampsMaster.length - timeStampIndex - 1])
+            timeStampIndex++;
+        }
+        else if (forecastDetails.list[i].dt_txt.split(" ")[0].split("-")[2] > today.getDate()) {
+            currentTimestamp.reverse()
+            dailyForecast.push(tempForecast)
+            tempForecast = []
+            k = i;
+            break;
+        }
+    }
+
+    //Upcoming days Forecast Details
+    for (var i = k; i < forecastDetails.list.length; i++) {
         j++
         tempForecast.push(forecastDetails.list[i])
         if (j % 8 === 0) {
@@ -37,7 +45,7 @@ function WeatherHomeLayout({ forecastDetails }) {
     const [selectedWeatherForecast, setSelectedWeatherForecast] = useState(dailyForecast[0]);
     const [timestamps, setTimestamps] = useState(currentTimestamp);
     const [carouselIndex, setCarouselIndex] = useState(0);
-    const [showWeatherDetails, setShowWeatherDetails] = useState(false);
+
     function getWeatherDataDayWise(index) {
         setSelectedWeatherForecast(dailyForecast[index])
         setCarouselIndex(index)
@@ -102,92 +110,96 @@ function WeatherHomeLayout({ forecastDetails }) {
         return (result);
     }
 
-    function navigateCarousel() {
-        setShowWeatherDetails(!showWeatherDetails)
-    }
-
     return (
+
         <center>
-
-            <div className="">
-                <h2><b>{forecastDetails.city.name} {kelvinToCelcius(selectedWeatherForecast[0].main.temp)}°C</b> </h2>
-            </div>
-            <div className="central">
-                <div className="alignright ">
-                    <div className="">
-                        {selectedWeatherForecast[0].weather[0].main === 'Clear' && <img className="sun-icon" />}
-                        {selectedWeatherForecast[0].weather[0].main === 'Clouds' && <img src={cloudy} style={{ height: "90px", width: "90px" }} />}
-                    </div>
-                </div>
-                <div className="alignleft">
-                    <div><span className="heading">Feels like:</span>&nbsp;<span className="text">{kelvinToCelcius(selectedWeatherForecast[0].main.feels_like)} °C</span></div>
-                    {/* <div><b>Pressure</b>&nbsp;{selectedWeatherForecast[0].main.pressure} hpa</div> */}
-                    <div><span className="heading">Humidity:</span>&nbsp;<span className="text">{selectedWeatherForecast[0].main.humidity}%</span></div>
-                    <div><span className="heading">Wind Speed:</span>&nbsp;<span className="text">{selectedWeatherForecast[0].wind.speed} m/s</span></div>
-                    <div><span className="heading">Chance of rain:</span>&nbsp;<span className="text">{selectedWeatherForecast[0].pop}%</span></div>
-                    <div><span className="heading">Cloudiness:</span>&nbsp;<span className="text">{selectedWeatherForecast[0].clouds.all}%</span></div>
-                    {/* <div><b>Visibility</b>&nbsp;{selectedWeatherForecast[0].visibility} m</div> */}
-                    {/* {carouselIndex == 0 && <div><b>Sunrise</b>&nbsp;{sunriseTime}&nbsp; </div>} */}
-                    {/* {carouselIndex == 0 && <div><b>Sunset</b>&nbsp;{sunsetTime}</div>} */}
-                </div> <br />
-            </div>
-
+            {/* <br />
+            <br />
+            
+            <br />
+            <br /> */}
             <div>
-                <div className="tablinks card-item" >
-                    <div className="card" >
-                        <div className="axis graph">
+                <div className="shadowBox">
+                    <div className="">
+                        <h2><b>{forecastDetails.city.name} {kelvinToCelcius(selectedWeatherForecast[0].main.temp)}° C</b> </h2>
+                    </div>
+                    <div className="central">
+                        <div className="alignright ">
+                            <div className="">
+                                {selectedWeatherForecast[0].weather[0].main === 'Clear' && <img className="sun-icon" />}
+                                {selectedWeatherForecast[0].weather[0].main === 'Clouds' && <img className="cloud-icon" />}
+                            </div>
+                        </div>
+                        <div className="alignleft">
+                            <div><span className="heading">Feels like:</span>&nbsp;<span className="text">{kelvinToCelcius(selectedWeatherForecast[0].main.feels_like)}°</span></div>
+                            {/* <div><b>Pressure</b>&nbsp;{selectedWeatherForecast[0].main.pressure} hpa</div> */}
+                            <div><span className="heading">Humidity:</span>&nbsp;<span className="text">{selectedWeatherForecast[0].main.humidity}%</span></div>
+                            <div><span className="heading">Wind Speed:</span>&nbsp;<span className="text">{selectedWeatherForecast[0].wind.speed} m/s</span></div>
+                            <div><span className="heading">Chance of rain:</span>&nbsp;<span className="text">{selectedWeatherForecast[0].pop}%</span></div>
+                            <div><span className="heading">Cloudiness:</span>&nbsp;<span className="text">{selectedWeatherForecast[0].clouds.all}%</span></div>
+                            {/* <div><b>Visibility</b>&nbsp;{selectedWeatherForecast[0].visibility} m</div> */}
+                            {/* {carouselIndex == 0 && <div><b>Sunrise</b>&nbsp;{sunriseTime}&nbsp; </div>} */}
+                            {/* {carouselIndex == 0 && <div><b>Sunset</b>&nbsp;{sunsetTime}</div>} */}
+                        </div> <br />
+                    </div>
 
-                            <Line options={{
-                                tooltips: { enabled: false, }, legend: { display: false }, scales:
-                                {
-                                    yAxes: [{
-                                        display: false,
-                                        gridLines: {
-                                            drawBorder: false,
-                                            display: false
-                                        },
-                                        ticks: {
-                                            beginAtZero: true,
-                                            min: 0,
-                                            max: 50
-                                        }
-                                    }],
-                                    xAxes: [{ gridLines: { display: false, }, }],
-                                }
-                            }}
-                                data={{
-                                    labels: selectedWeatherForecast.map((weatherDetails, index) => [kelvinToCelcius(weatherDetails.main.temp) + "°", timestamps[index]]),
-                                    datasets: [{
-                                        data: selectedWeatherForecast.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp)),
-                                        label: 'Temp',
-                                        borderColor: '#3498DB',
-                                        fill: false
-                                    }]
+                    {/* <div> */}
+                    <div className="tablinks card-item" >
+                        <div className="card" >
+                            <div className="axis graph">
+
+                                <Line options={{
+                                    tooltips: { enabled: false, }, legend: { display: false }, scales:
+                                    {
+                                        yAxes: [{
+                                            display: false,
+                                            gridLines: {
+                                                drawBorder: false,
+                                                display: false
+                                            },
+                                            ticks: {
+                                                beginAtZero: true,
+                                                min: 0,
+                                                max: 50
+                                            }
+                                        }],
+                                        xAxes: [{ gridLines: { display: false, }, }],
+                                    }
                                 }}
-                            />
+                                    data={{
+                                        labels: selectedWeatherForecast.map((weatherDetails, index) => [kelvinToCelcius(weatherDetails.main.temp) + "°", timestamps[index]]),
+                                        datasets: [{
+                                            data: selectedWeatherForecast.map((weatherDetails) => kelvinToCelcius(weatherDetails.main.temp)),
+                                            label: 'Temp',
+                                            borderColor: '#3498DB',
+                                            fill: false
+                                        }]
+                                    }}
+                                />
+                            </div>
                         </div>
                     </div>
+                    {/* </div> */}
                 </div>
-
-                <div className="demo">
-                    <div className="carousel">
-                        {dailyForecast.map((weatherDetails, index) => (
-                            <div className={"tablinks c-item " + (carouselIndex === index ? 'active' : '')} onClick={() => getWeatherDataDayWise(index)}>
-                                <div>
-                                    <b>{upcomingDays[index]}</b><br />
-                                    <b>{kelvinToCelcius(getMaxTemp(index))}° <span style={{ color: "rgb(167, 165, 165)" }}>{kelvinToCelcius(getMinTemp(index))}° </span></b><br />
-                                    {getWeatherDataDayWiseMain(index) === 'Clear' && <img src={sun} width="24px" height="25px" />}
-                                    {getWeatherDataDayWiseMain(index) === 'Clouds' && <img src={cloudy} width="24px" height="25px" />}
-                                    <br />
-                                    <b style={{ color: "rgb(167, 165, 165)" }}>{getForecast(getWeatherDataDayWiseMain(index))}</b><br />
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+            </div>
+            <div className="demo">
+                <div className="carousel">
                     {dailyForecast.map((weatherDetails, index) => (
-                        <span className={"dot " + (carouselIndex === index ? 'active-dot' : '')}></span>
+                        <div className={"tablinks c-item " + (carouselIndex === index ? 'active' : '')} onClick={() => getWeatherDataDayWise(index)}>
+                            <div>
+                                <b>{upcomingDays[index]}</b><br />
+                                <b>{kelvinToCelcius(getMaxTemp(index))}° <span style={{ color: "rgb(167, 165, 165)" }}>{kelvinToCelcius(getMinTemp(index))}° </span></b><br />
+                                {getWeatherDataDayWiseMain(index) === 'Clear' && <img src={sun} width="24px" height="25px" />}
+                                {getWeatherDataDayWiseMain(index) === 'Clouds' && <img src={cloudy} width="24px" height="25px" />}
+                                <br />
+                                <b style={{ color: "rgb(167, 165, 165)" }}>{getForecast(getWeatherDataDayWiseMain(index))}</b><br />
+                            </div>
+                        </div>
                     ))}
                 </div>
+                {dailyForecast.map((weatherDetails, index) => (
+                    <span className={"dot " + (carouselIndex === index ? 'active-dot' : '')}></span>
+                ))}
             </div>
         </center >
     )
