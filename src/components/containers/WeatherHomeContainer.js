@@ -45,6 +45,8 @@ class WeatherHomeContainer extends React.Component {
                 {/* <Form form={form} className="myForm" onChange={this.cityChange} /> */}
                 {this.props.weatherData.loading ? <Loader /> :
                     <div>
+                        
+
                         <div className="search center">
                             <Autocomplete
                                 onChange={this.cityChange}
@@ -59,19 +61,19 @@ class WeatherHomeContainer extends React.Component {
                                 // style={{ width: 300 }}
                                 renderInput={(params) =>
                                     <TextField {...params} placeholder="Search City" variant="outlined"
-                                    InputProps={{
-                                        ...params.InputProps,
-                                        startAdornment: (
-                                            <InputAdornment position="start">
-                                                <RoomIcon />
-                                            </InputAdornment>
-                                        ),
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <SearchIcon />
-                                            </InputAdornment>
-                                        )
-                                    }}
+                                        InputProps={{
+                                            ...params.InputProps,
+                                            startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <RoomIcon />
+                                                </InputAdornment>
+                                            ),
+                                            endAdornment: (
+                                                <InputAdornment position="end">
+                                                    <SearchIcon />
+                                                </InputAdornment>
+                                            )
+                                        }}
                                     />}
                             />
                         </div>

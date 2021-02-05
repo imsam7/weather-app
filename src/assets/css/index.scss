@@ -81,11 +81,25 @@ body {
   border-color: #ffffff;
 }
 
+.flexedCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .center {
   display: flex;
   justify-content: center;
   margin: auto;
 }
+
+.mobileNone {
+  display: none;
+}
+
+// .desktopNone {
+//   display: block;
+// }
 
 //Carousel CSS
 .carousel-control {
@@ -426,6 +440,18 @@ body {
 // Desktop CSS Start
 
 @media (min-width: 768px) {
+  .desktopNone {
+    display: none !important;
+  }
+
+  .mobileNone {
+    display: block;
+  }
+
+  .sunmoon {
+    display: none;
+  }
+
   .card {
     width: calc(100% - 800px);
     height: 100%;
@@ -526,17 +552,30 @@ body {
   content: url("../img/sun.png");
   height: 90px;
   width: 90px;
-  -webkit-animation: spin 5s linear infinite;
-  animation: spin 5s linear infinite;
+  -webkit-animation: zoominout 5s infinite;
+  animation: zoominout 5s infinite;
+}
+
+.sun-icon-graph {
+  content: url("../img/sun.png");
+  height: 30px;
+  width: 30px;
+  margin-bottom: 10px;
+  -webkit-animation: zoominout 2s infinite;
+  animation: zoominout 2s infinite;
 }
 
 .cloud-icon {
   content: url("../img/cloudy.png");
   height: 90px;
   width: 90px;
-  animation: shake 0.5s;
-  animation-iteration-count: infinite;
+  animation: shake 5s infinite;
+  -webkit-animation: shake 5s infinite;
 }
+
+//Icons end
+
+//Animations start
 
 @keyframes shake {
   10%,
@@ -560,4 +599,92 @@ body {
     transform: translate3d(4px, 0, 0);
   }
 }
-//Icons end
+
+@keyframes zoominout {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.2, 1.2);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+//Animations end
+
+$arc-diameter: 170px;
+
+.sunmoon {
+  position: relative;
+  margin-top: 60px;
+}
+
+.sun-times {
+  margin-top: 0px;
+  width: 230px;
+  height: 60px;
+  border-bottom: 1px solid #999;
+  overflow-y: hidden;
+
+  .sun-path {
+    margin-left: 25px;
+    width: $arc-diameter;
+    height: $arc-diameter;
+    overflow: hidden;
+    // border: 1px dashed #999;
+    border-radius: 50%;
+  }
+
+  .sun-symbol-path {
+    position: absolute;
+    color: yellow;
+    text-shadow: 0 0 5px black;
+    height: 35px;
+    -webkit-transition: -webkit-transform 2s linear;
+    -webkit-transform-origin: 50% 100%;
+    -webkit-transform: rotateZ(27deg);
+    left: 165px;
+    bottom: 0;
+
+    .symbol {
+      position: relative;
+      font-size: 16px;
+      top: -8px;
+    }
+  }
+
+  .sun-animation {
+    border: white;
+    width: 100%;
+    height: 150px;
+    background-image: linear-gradient(to left, red, yellow);
+    -webkit-transition: width 2s linear;
+    transition: width 2s linear;
+  }
+}
+
+.markers {
+  position: absolute;
+  bottom: 1em;
+
+  & > div {
+    position: absolute;
+    font-size: 12px;
+    width: 80px;
+  }
+
+  .sunrise {
+    left: -30px;
+  }
+
+  .sunset {
+    left: 190px;
+    // right: 0;
+  }
+}
+
+.controls {
+  margin-top: 50px;
+}
